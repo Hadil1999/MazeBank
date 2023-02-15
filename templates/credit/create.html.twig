@@ -35,79 +35,96 @@
                       value="vR3eXGkdlb2WWaaLMMakQUdvmL2t5FszaT4AsjYX"
                     />
                     <div class="form-group">
-                      <label class="form-label required">Bank</label>
-                      <select
-                        name="wire_transfer_bank_id"
-                        id="bankmethod"
-                        class="form-select"
-                        required
-                      >
-                        <option value="">Select Bank</option>
-                        <option
-                          value="1"
-                          data-swift="CIBLBDDH"
-                          data-currency="USD"
-                          data-country="Bangladesh"
-                          data-routing="987456123"
-                        >
-                          The City Bank Limited
-                        </option>
-                      </select>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group mb-3 mt-3">
-                          <label class="form-label">Swift Code</label>
-                        
-											<input
-                        class="form-control"
-                        type="file"
-                        class="form-control"
-                      />
-										</div>
-                      
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group mb-3 mt-3">
-                          <label class="form-label">Currency</label>
-                         	<input
-                        class="form-control"
-                        type="file"
-                        class="form-control"
-                      />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group mb-3 mt-3">
-                          <label class="form-label">Routing Number</label>
-                         	<input
-                        class="form-control"
-                        type="file"
-                        class="form-control"
-                      />
-                        </div>
-                      </div>
-
-                      <div class="col-md-6">
-                        <div class="form-group mb-3 mt-3">
-                          <label class="form-label">Country</label>
-                          <input
+                      <label class="form-label required">Category</label>
+                      <input
                             type="text"
                             id="country"
                             name="country"
                             class="form-control"
                             autocomplete="off"
-                            placeholder="Enter Country"
+                            placeholder="category selected"
+                            value=""
+                          />
+                    </div>
+
+                    <div class="form-group  mb-3 mt-3">
+                    <div class="col">
+                    <h2 class="page-title">To Apply for this loan you must follow this process :</h2>
+                    </div>
+                    </div>
+                    <div class="card text-white bg-danger mb-3" >
+                      <div class="card-header">personal information</div>
+                    </div>
+                    
+                    <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3 mt-3">
+                          <label class="form-label">first name</label>
+                        
+											    <input
+                            type="text"
+                            id="firstname"
+                            name="firstname"
+                            class="form-control"
+                            autocomplete="off"
+                            placeholder="Enter your first name "
+                            value=""
+                          />
+										    </div>
+                      
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group mb-3 mt-3">
+                          <label class="form-label">last name</label>
+                        
+											  <input
+                            type="text"
+                            id="lastname"
+                            name="lastname"
+                            class="form-control"
+                            autocomplete="off"
+                            placeholder="Enter your last name "
+                            value=""
+                          />
+										  </div>
+                      
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group mb-3 mt-3">
+                          <label class="form-label">Cin</label>
+                         	<input
+                            type="text"
+                            id="cin"
+                            name="cin"
+                            class="form-control"
+                            autocomplete="off"
+                            placeholder="Enter your cin "
+                            value=""
+                          />
+                        </div>
+                        </div>
+                          <div class="col-md-6">
+                         <div class="form-group mb-3 mt-3">
+                          <label class="form-label">address email</label>
+                         	<input
+                            type="text"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            autocomplete="off"
+                            placeholder="Enter your email "
                             value=""
                           />
                         </div>
                       </div>
                     </div>
+                    </div>
+                     <div class="card text-white bg-danger mb-3" >
+                      <div class="card-header">Loan informations</div>
+                    </div>
+                    
+                    
 
                     <div class="row">
                       <div class="col-md-6">
@@ -126,22 +143,8 @@
 
                       <div class="col-md-6">
                         <div class="form-group mb-3 mt-3">
-                          <label class="form-label">Account Holder Name</label>
+                          <label class="form-label">Amount</label>
                           <input
-                            type="text"
-                            name="account_holder_name"
-                            class="form-control"
-                            autocomplete="off"
-                            placeholder="Enter Account Holder Name"
-                            value=""
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="form-group mb-3 mt-3">
-                      <label class="form-label required">Amount</label>
-                      <input
                         name="amount"
                         id="amount"
                         class="form-control"
@@ -152,7 +155,11 @@
                         min="1"
                         required
                       />
+                        </div>
+                      </div>
                     </div>
+
+                    
 
                     <div class="form-group mb-3">
                       <label class="form-label">Note</label>
@@ -165,10 +172,44 @@
                       ></textarea>
                     </div>
 
-                    <div class="form-footer">
+                    <div class="card text-white bg-danger mb-3" >
+                      <div class="card-header">add the requested documents :</div>
+                    </div>
+                    
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mb-3 mt-3">
+                          <label class="form-label">Id card copy </label>
+                          <h5>first side</h5>
+                  
+                          <input
+                        class="form-control"
+                        type="file"
+                        class="form-control"
+                      />
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group mb-3 mt-3">
+                          <label class="form-label"><br></label>
+                          <h5>second side</h5>
+                  
+                        <input
+                        class="form-control"
+                        type="file"
+                        class="form-control"
+                      />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-3 bg-light" >
                       <button type="submit" class="btn btn-primary w-100">
                         Submit
                       </button>
+                    </div>
                     </div>
                   </form>
                 </div>

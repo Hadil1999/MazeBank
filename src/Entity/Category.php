@@ -18,6 +18,9 @@ class Category
     #[ORM\OneToMany(mappedBy: 'creditCategory', targetEntity: Credit::class)]
     private Collection $credits;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->credits = new ArrayCollection();
@@ -63,6 +66,18 @@ class Category
                 $credit->setCreditCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
