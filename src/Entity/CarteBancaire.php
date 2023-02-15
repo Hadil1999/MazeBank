@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 class CarteBancaire
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Assert\NotBlank(message:"id is required")]
     private ?int $id = null;
 
     public function getId(): ?int
