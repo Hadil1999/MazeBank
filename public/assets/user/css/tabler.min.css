@@ -12568,8 +12568,8 @@ a.badge {
 .btn-ghost-success,
 .btn-outline-success,
 .btn-success {
-	--tblr-btn-color: #2fb344;
-	--tblr-btn-color-interactive: #2aa13d;
+	--tblr-btn-color: #626976;
+	--tblr-btn-color-interactive: #1e293b;
 	--tblr-btn-color-text: #f8fafc;
 }
 .btn-ghost-info,

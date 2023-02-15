@@ -8,7 +8,7 @@
           <div class="page-header d-print-none">
             <div class="row align-items-center">
               <div class="col">
-                <h2 class="page-title">Send Money</h2>
+                <h2 class="page-title">Apply for a credit card</h2>
               </div>
             </div>
           </div>
@@ -25,7 +25,7 @@
                         href="#other-account"
                         class="nav-link active"
                         data-bs-toggle="tab"
-                        >Carte</a
+                        >Bank card</a
                       >
                     </li>
                     <li class="nav-item">
@@ -33,7 +33,7 @@
                         href="#saved-account"
                         class="nav-link"
                         data-bs-toggle="tab"
-                        >chéque</a
+                        >cheque book</a
                       >
                     </li>
                   </ul>
@@ -52,24 +52,36 @@
 											name="_token"
 											value="WksVJnpyHqYpoyptbulu889pFriM8GBfHFZ5Da7z"
 										/>
+										
 										<div class="form-group">
-											<label class="form-label required">Carte</label>
+											<label class="form-label required">Bank card</label>
 											<select
 												name="method"
 												id="withmethod"
 												class="form-select"
 												required
 											>
-												<option value="">Select Payment Method</option>
-												<option value="paypal">Paypal</option>
-												<option value="stripe">Stripe</option>
-												<option value="instamojo">Instamojo</option>
-												<option value="paytm">Paytm</option>
-												<option value="mollie">Mollie Payment</option>
-												<option value="razorpay">Razorpay</option>
-												<option value="authorize.net">Authorize.Net</option>
-												<option value="flutterwave">Flutter Wave</option>
+												<option value="">Select Gamme</option>
+												<option value="paypal">MasterCard classic</option>
+												<option value="stripe">Visa classic</option>
+												<option value="instamojo">Visa premier</option>
+												<option value="paytm">Gold MasterCard</option>
+												<option value="mollie">Visa Infinite</option>
+												<option value="razorpay">MasterCard World Elite</option>
+												
 											</select>
+										</div>
+										<div class="form-group mb-3 mt-3">
+											<label class="form-label required">Email</label>
+											<input
+												name="id"
+												id="id"
+												class="form-control"
+                            					autocomplete="off"
+                            					placeholder="Enter your username"
+                            					value=""
+												required
+											/>
 										</div>
 
 										<div id="card-view" class="col-lg-12 pt-3 d-none">
@@ -138,26 +150,25 @@
 										<input type="hidden" name="currency_id" value="1" />
 
 										<div class="form-group mb-3 mt-3">
-											<label class="form-label required">Deposit Amount</label>
+											<label class="form-label required">identifier</label>
 											<input
-												name="amount"
-												id="amount"
+												name="id"
+												id="id"
 												class="form-control"
-												autocomplete="off"
-												placeholder="0.0"
-												type="number"
-												value=""
-												min="1"
+                            					autocomplete="off"
+                            					placeholder="Enter your identifier"
+                            					value=""
 												required
 											/>
 										</div>
 
                     <div class="form-group mb-3">
-											<label class="form-label">Folder</label>
+											<label class="form-label required">Identity card</label>
 											<input
                         class="form-control"
                         type="file"
                         class="form-control"
+						
                       />
 										</div>
 
@@ -197,22 +208,17 @@
 											value="WksVJnpyHqYpoyptbulu889pFriM8GBfHFZ5Da7z"
 										/>
 										<div class="form-group">
-											<label class="form-label required">Chéque </label>
+											<label class="form-label required">cheque book </label>
 											<select
 												name="method"
 												id="withmethod"
 												class="form-select"
 												required
 											>
-												<option value="">Select Payment Method</option>
-												<option value="paypal">Paypal</option>
-												<option value="stripe">Stripe</option>
-												<option value="instamojo">Instamojo</option>
-												<option value="paytm">Paytm</option>
-												<option value="mollie">Mollie Payment</option>
-												<option value="razorpay">Razorpay</option>
-												<option value="authorize.net">Authorize.Net</option>
-												<option value="flutterwave">Flutter Wave</option>
+												<option value="">Select format</option>
+												<option value="paypal">chéquier classique à souche latérale</option>
+												<option value="stripe">chéquier portefeuille</option>
+												<option value="instamojo">chéquier correspondance ou à en-tête</option>
 											</select>
 										</div>
 
@@ -280,30 +286,49 @@
 											value="USD"
 										/>
 										<input type="hidden" name="currency_id" value="1" />
+										<div class="form-group mb-3 mt-3">
+											<label class="form-label required">Email</label>
+											<input
+												name="id"
+												id="id"
+												class="form-control"
+                            					autocomplete="off"
+                            					placeholder="Enter your username"
+                            					value=""
+												required
+											/>
+										</div>
 
 										<div class="form-group mb-3 mt-3">
-											<label class="form-label required">Deposit Amount</label>
+											<label class="form-label required">identifier</label>
 											<input
-												name="amount"
-												id="amount"
+												name="id"
+												id="id"
 												class="form-control"
-												autocomplete="off"
-												placeholder="0.0"
-												type="number"
-												value=""
-												min="1"
+                            					autocomplete="off"
+                            					placeholder="Enter your identifier"
+                            					value=""
 												required
 											/>
 										</div>
 
                     <div class="form-group mb-3">
-											<label class="form-label">Folder</label>
+											<label class="form-label">Identity card</label>
 											<input
                         class="form-control"
                         type="file"
                         class="form-control"
                       />
 										</div>
+										 <div class="form-group mb-3">
+											<label class="form-label">Apply for a cheque book</label>
+											<input
+                        class="form-control"
+                        type="file"
+                        class="form-control"
+                      />
+										</div>
+
 
 										<div class="form-group mb-3">
 											<label class="form-label">Description</label>
