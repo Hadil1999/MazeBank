@@ -11,7 +11,7 @@ class TransactionController extends AbstractController
     #[Route('/transactions', name: 'transactions')]
     public function index(): Response
     {
-        return $this->render('transaction/transactions.html.twig', [
+        return $this->render('transaction/wireTransferAll.html.twig', [
             'controller_name' => 'TransactionController',
         ]);
     }
@@ -19,7 +19,7 @@ class TransactionController extends AbstractController
     #[Route('/detailsTransaction', name: 'transaction_details')]
     public function details(): Response
     {
-        return $this->render('transaction/details.html.twig', [
+        return $this->render('transaction/wireTransferDetails.html.twig', [
             'controller_name' => 'TransactionController',
         ]);
     }
@@ -27,8 +27,105 @@ class TransactionController extends AbstractController
     #[Route('/createTransaction', name: 'transaction_create')]
     public function create(): Response
     {
-        return $this->render('transaction/create.html.twig', [
+        return $this->render('transaction/wireTransferCreate.html.twig', [
             'controller_name' => 'TransactionController',
         ]);
     }
+    /** Transfer */
+    #[Route('/SendMoney', name: 'transaction_sendMoney')]
+    public function sendMoney(): Response
+    {
+        return $this->render('transaction/sendMoney.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+    #[Route('/beneficiaries', name: 'beneficiaries')]
+    public function beneficiaries(): Response
+    {
+        return $this->render('transaction/beneficiaries.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+    #[Route('/detailsbeneficiarie', name: 'beneficiarie_details')]
+    public function detailsBenef(): Response
+    {
+        return $this->render('transaction/beneficiarieDetails.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+    #[Route('/createbeneficiarie', name: 'beneficiarie_create')]
+    public function createBenef(): Response
+    {
+        return $this->render('transaction/beneficiarieCreate.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+
+
+    #[Route('/otherBank', name: 'otherBanks')]
+    public function getAllotherBanks(): Response
+    {
+        return $this->render('transaction/otherBank.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+    #[Route('/sendOtherBank', name: 'otherBank_send')]
+    public function sendToOtherBank(): Response
+    {
+        return $this->render('transaction/otherBankSend.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+
+    #[Route('/AllwireTransfer', name: 'wireTransfer_All')]
+    public function getAllwireTransfer(): Response
+    {
+        return $this->render('transaction/wireTransferAll.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+    #[Route('/createWireTransfer', name: 'wireTransfer_create')]
+    public function CreateWireTransfer(): Response
+    {
+        return $this->render('transaction/wireTransferCreate.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+
+    #[Route('/detailsWireTransfer', name: 'wireTransfer_details')]
+    public function DetailsWireTransfer(): Response
+    {
+        return $this->render('transaction/wireTransferDetails.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+
+    #[Route('/transferHistory', name: 'transfer_history')]
+    public function History(): Response
+    {
+        return $this->render('transaction/transferHistory.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+    #[Route('/transactions', name: 'transactions')]
+    public function transactions(): Response
+    {
+        return $this->render('transaction/transactions.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+
+
+
 }
