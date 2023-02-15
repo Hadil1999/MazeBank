@@ -1,323 +1,675 @@
 {% extends 'baseClient.html.twig' %}
 
 {% block body %}
-    <div class="page-wrapper">
 
-            <div class="container-xl">
-                <div class="page-header d-print-none">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="page-pretitle">
-                                Overview
-                            </div>
-                            <h2 class="page-title">
-                                Wire Transfer
-                            </h2>
-                        </div>
-                        <div class="col-auto ms-auto d-print-none">
-                            <div class="btn-list">
-
-                                <a href=" {{ path('transaction_create') }}" class="btn btn-primary d-none d-sm-inline-block">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-              Add Wire Transfer
-            </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="page-wrapper">
+        <div class="container-xl">
+          <div class="page-header d-print-none">
+            <div class="row align-items-center">
+              <div class="col">
+                <h2 class="page-title">Transaction</h2>
+              </div>
             </div>
-
-            <div class="page-body">
-                <div class="container-xl">
-                    <div class="row row-cards">
-                        <div class="col-12">
-                            <div class="card">
-                            <div class="table-responsive">
-                                    <table class="table table-vcenter table-mobile-md card-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Bank Name</th>
-                                                <th>Account Name</th>
-                                                <th>Account Number</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
-                                                <th>Details</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td data-label="Date">
-                                                    <div>
-                                                        Sep 12, 2022
-                                                    </div>
-                                                </td>
-                                                <td data-label="Bank Name">
-                                                    <div>
-                                                        The City Bank Limited
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Name">
-                                                    <div>
-                                                        smnsmn
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Number">
-                                                    <div>
-                                                        04804324324
-                                                    </div>
-                                                </td>
-                                                <td data-label="Amount">
-                                                    <div>
-                                                        1.73€
-                                                    </div>
-                                                </td>
-                                                <td data-label="Status">
-                                                    <div>
-                                                        <span class="badge bg-warning">pending</span>
-                                                    </div>
-                                                </td>
-
-                                                <td data-label="Details">
-                                                    <div class="btn-list">
-                                                        <a  href=" {{ path('transaction_details') }}"  class="btn btn-primary">
-                                                           Details
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td data-label="Date">
-                                                    <div>
-                                                        Sep 12, 2022
-                                                    </div>
-                                                </td>
-                                                <td data-label="Bank Name">
-                                                    <div>
-                                                        The City Bank Limited
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Name">
-                                                    <div>
-                                                        smnsmn
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Number">
-                                                    <div>
-                                                        04804324324
-                                                    </div>
-                                                </td>
-                                                <td data-label="Amount">
-                                                    <div>
-                                                        1.73€
-                                                    </div>
-                                                </td>
-                                                <td data-label="Status">
-                                                    <div>
-                                                        <span class="badge bg-warning">pending</span>
-                                                    </div>
-                                                </td>
-
-                                                <td data-label="Details">
-                                                    <div class="btn-list">
-                                                        <a  href=" {{ path('transaction_details') }}"  class="btn btn-primary">
-                                                           Details
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td data-label="Date">
-                                                    <div>
-                                                        Sep 12, 2022
-                                                    </div>
-                                                </td>
-                                                <td data-label="Bank Name">
-                                                    <div>
-                                                        The City Bank Limited
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Name">
-                                                    <div>
-                                                        smnsmn
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Number">
-                                                    <div>
-                                                        04804324324
-                                                    </div>
-                                                </td>
-                                                <td data-label="Amount">
-                                                    <div>
-                                                        1.73€
-                                                    </div>
-                                                </td>
-                                                <td data-label="Status">
-                                                    <div>
-                                                        <span class="badge bg-warning">pending</span>
-                                                    </div>
-                                                </td>
-
-                                                <td data-label="Details">
-                                                    <div class="btn-list">
-                                                        <a  href=" {{ path('transaction_details') }}"  class="btn btn-primary">
-                                                           Details
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td data-label="Date">
-                                                    <div>
-                                                        Sep 12, 2022
-                                                    </div>
-                                                </td>
-                                                <td data-label="Bank Name">
-                                                    <div>
-                                                        The City Bank Limited
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Name">
-                                                    <div>
-                                                        smnsmn
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Number">
-                                                    <div>
-                                                        04804324324
-                                                    </div>
-                                                </td>
-                                                <td data-label="Amount">
-                                                    <div>
-                                                        1.73€
-                                                    </div>
-                                                </td>
-                                                <td data-label="Status">
-                                                    <div>
-                                                        <span class="badge bg-warning">pending</span>
-                                                    </div>
-                                                </td>
-
-                                                <td data-label="Details">
-                                                    <div class="btn-list">
-                                                        <a  href=" {{ path('transaction_details') }}"  class="btn btn-primary">
-                                                           Details
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td data-label="Date">
-                                                    <div>
-                                                        Sep 12, 2022
-                                                    </div>
-                                                </td>
-                                                <td data-label="Bank Name">
-                                                    <div>
-                                                        The City Bank Limited
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Name">
-                                                    <div>
-                                                        smnsmn
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Number">
-                                                    <div>
-                                                        04804324324
-                                                    </div>
-                                                </td>
-                                                <td data-label="Amount">
-                                                    <div>
-                                                        1.73€
-                                                    </div>
-                                                </td>
-                                                <td data-label="Status">
-                                                    <div>
-                                                        <span class="badge bg-warning">pending</span>
-                                                    </div>
-                                                </td>
-
-                                                <td data-label="Details">
-                                                    <div class="btn-list">
-                                                        <a  href=" {{ path('transaction_details') }}"  class="btn btn-primary">
-                                                           Details
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td data-label="Date">
-                                                    <div>
-                                                        Sep 12, 2022
-                                                    </div>
-                                                </td>
-                                                <td data-label="Bank Name">
-                                                    <div>
-                                                        The City Bank Limited
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Name">
-                                                    <div>
-                                                        smnsmn
-                                                    </div>
-                                                </td>
-                                                <td data-label="Account Number">
-                                                    <div>
-                                                        04804324324
-                                                    </div>
-                                                </td>
-                                                <td data-label="Amount">
-                                                    <div>
-                                                        1.73€
-                                                    </div>
-                                                </td>
-                                                <td data-label="Status">
-                                                    <div>
-                                                        <span class="badge bg-warning">pending</span>
-                                                    </div>
-                                                </td>
-
-                                                <td data-label="Details">
-                                                    <div class="btn-list">
-                                                        <a  href=" {{ path('transaction_details') }}"  class="btn btn-primary">
-                                                           Details
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                                <nav>
-                                    <ul class="pagination">
-
-                                        <li class="page-item disabled" aria-disabled="true" aria-label="&laquo; Previous">
-                                            <span class="page-link" aria-hidden="true">&lsaquo;</span>
-                                        </li>
-
-
-
-
-
-                                        <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
-                                        <li class="page-item"><a class="page-link" href="https://product.geniusocean.com/genius-bank/user/wire-transfer?page=2">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="https://product.geniusocean.com/genius-bank/user/wire-transfer?page=3">3</a></li>
-
-
-                                        <li class="page-item">
-                                            <a class="page-link" href="https://product.geniusocean.com/genius-bank/user/wire-transfer?page=2" rel="next" aria-label="Next &raquo;">&rsaquo;</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
+          </div>
         </div>
-        
+
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="row row-cards">
+              <div class="col-12">
+                <div class="card">
+                  <div class="table-responsive">
+                    <table
+                      class="table card-table table-vcenter text-nowrap datatable"
+                    >
+                      <thead>
+                        <tr>
+                          <th class="w-1">
+                            No.
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="icon icon-sm text-dark icon-thick"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <polyline points="6 15 12 9 18 15" />
+                            </svg>
+                          </th>
+                          <th>Type</th>
+                          <th>Txnid</th>
+                          <th>Amount</th>
+                          <th>Date</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">1</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>DPS</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>jsGP1676294916</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">9000$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>13 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">2</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>DPS</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>L8HA1676227500</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">10000$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>13 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">3</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>PAYOUT</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>zKZodWvzyrqg</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">7.85$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>12 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">4</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>PAYOUT</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>S41QDiymY8RI</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">1968$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>11 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">5</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>SUBSCRIPTION</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>4oNk1676085109</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">100$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>11 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">6</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>SEND MONEY</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>BJCG1675664066</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">10$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>06 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">7</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>DEPOSIT</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>ukDuDqDpqgQk</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">20$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>06 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">8</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>PAYOUT</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>XcybhGfJc6AL</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">7.85$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>05 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">9</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>DEPOSIT</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>kx3sqLNzUJpx</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">13.51$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>05 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">10</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>LOAN</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>ve6B1675255128</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">100000$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>01 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">11</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>LOAN</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>TiPU1675241756</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">50000$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>01 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">12</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>LOAN</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>BmKq1675191945</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">5000$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>01 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">13</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>SUBSCRIPTION</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>ATDK1675190476</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">100$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>01 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">14</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>SUBSCRIPTION</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>EoiJ1675190353</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">100$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>01 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">15</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>SUBSCRIPTION</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>zre51675190233</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">100$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>01 Feb 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">16</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>PAYOUT</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>GT4wIwLe23tB</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">0.28$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>29 Jan 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">17</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>PAYOUT</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>eQaELG7aSI3l</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">16.72$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>27 Jan 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">18</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>PAYOUT</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>7jBGIgn8WMwI</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">19.67$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>27 Jan 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">19</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>PAYOUT</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>mbqdaNBxq4Ek</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-danger">96.5$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>26 Jan 2023</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td data-label="No">
+                            <div>
+                              <span class="text-muted">20</span>
+                            </div>
+                          </td>
+
+                          <td data-label="Type">
+                            <div>LOAN</div>
+                          </td>
+
+                          <td data-label="Txnid">
+                            <div>BGRb1674662341</div>
+                          </td>
+
+                          <td data-label="Amount">
+                            <div>
+                              <p class="text-success">70000$</p>
+                            </div>
+                          </td>
+
+                          <td data-label="Date">
+                            <div>25 Jan 2023</div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <nav>
+                    <ul class="pagination">
+                      <li
+                        class="page-item disabled"
+                        aria-disabled="true"
+                        aria-label="&laquo; Previous"
+                      >
+                        <span class="page-link" aria-hidden="true"
+                          >&lsaquo;</span
+                        >
+                      </li>
+
+                      <li class="page-item active" aria-current="page">
+                        <span class="page-link">1</span>
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=2"
+                          >2</a
+                        >
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=3"
+                          >3</a
+                        >
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=4"
+                          >4</a
+                        >
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=5"
+                          >5</a
+                        >
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=6"
+                          >6</a
+                        >
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=7"
+                          >7</a
+                        >
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=8"
+                          >8</a
+                        >
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=9"
+                          >9</a
+                        >
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=10"
+                          >10</a
+                        >
+                      </li>
+
+                      <li class="page-item disabled" aria-disabled="true">
+                        <span class="page-link">...</span>
+                      </li>
+
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=22"
+                          >22</a
+                        >
+                      </li>
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=23"
+                          >23</a
+                        >
+                      </li>
+
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="https://product.geniusocean.com/genius-bank/user/transactions?page=2"
+                          rel="next"
+                          aria-label="Next &raquo;"
+                          >&rsaquo;</a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 {% endblock %}
