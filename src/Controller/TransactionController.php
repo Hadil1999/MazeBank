@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TransactionController extends AbstractController
 {
+    /**********Client Route ************ */ 
     #[Route('/transactions', name: 'transactions')]
     public function index(): Response
     {
@@ -31,7 +32,7 @@ class TransactionController extends AbstractController
             'controller_name' => 'TransactionController',
         ]);
     }
-    /** Transfer */
+    /** Transfer ,send money */
     #[Route('/SendMoney', name: 'transaction_sendMoney')]
     public function sendMoney(): Response
     {
@@ -82,7 +83,7 @@ class TransactionController extends AbstractController
         ]);
     }
 
-
+     /***USER */
     #[Route('/AllwireTransfer', name: 'wireTransfer_All')]
     public function getAllwireTransfer(): Response
     {
@@ -108,7 +109,7 @@ class TransactionController extends AbstractController
         ]);
     }
 
-
+  
     #[Route('/transferHistory', name: 'transfer_history')]
     public function History(): Response
     {
@@ -117,10 +118,35 @@ class TransactionController extends AbstractController
         ]);
     }
 
-    #[Route('/transactions', name: 'transactions')]
+    #[Route('/transactions1', name: 'transactions1')]
     public function transactions(): Response
     {
         return $this->render('transaction/transactions.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+      /***ADMIN */
+      #[Route('/wire-transfer', name: 'wireTransfer_All_ADD')]
+      public function ALLWireTransfer(): Response
+      {
+          return $this->render('transaction/wireTransfer_Ad.html.twig', [
+              'controller_name' => 'TransactionController',
+          ]);
+      }
+ 
+    #[Route('/Money-Request', name: 'moneyRequest_Ad')]
+    public function ALLMoneyRequest(): Response
+    {
+        return $this->render('transaction/moneyRequest_Ad.html.twig', [
+            'controller_name' => 'TransactionController',
+        ]);
+    }
+
+    #[Route('/Transactions-Ad', name: 'transactions_Ad')]
+    public function AllTransactions(): Response
+    {
+        return $this->render('transaction/transactions_Ad.html.twig', [
             'controller_name' => 'TransactionController',
         ]);
     }

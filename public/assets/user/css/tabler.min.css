@@ -3790,6 +3790,17 @@ fieldset:disabled .btn {
 	background-color: #fff;
 	border-bottom: 1px solid rgba(98, 105, 118, 0.16);
 }
+.cardAdd {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #000000;
+	background-clip: border-box;
+	border: 1px solid rgba(98, 105, 118, 0.16);
+	border-radius: 4px;
+}
 .card-header:first-child {
 	border-radius: 3px 3px 0 0;
 }

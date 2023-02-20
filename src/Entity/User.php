@@ -34,10 +34,14 @@ class User
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reclamation::class)]
     private Collection $userReclamation;
 
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Compte::class)]
+    private Collection $comptes;
+
     public function __construct()
     {
         $this->userAgence = new ArrayCollection();
         $this->userReclamation = new ArrayCollection();
+        $this->comptes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -147,6 +151,36 @@ class User
             // set the owning side to null (unless already changed)
             if ($userReclamation->getUser() === $this) {
                 $userReclamation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Compte>
+     */
+    public function getComptes(): Collection
+    {
+        return $this->comptes;
+    }
+
+    public function addCompte(Compte $compte): self
+    {
+        if (!$this->comptes->contains($compte)) {
+            $this->comptes->add($compte);
+            $compte->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompte(Compte $compte): self
+    {
+        if ($this->comptes->removeElement($compte)) {
+            // set the owning side to null (unless already changed)
+            if ($compte->getIdUser() === $this) {
+                $compte->setIdUser(null);
             }
         }
 
