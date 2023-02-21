@@ -24,8 +24,8 @@
                        <table class="table mb-0">
     <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ compte.id }}</td>
+                <th>Status</th>
+                <td><span class="badge bg-warning" >{{ compte.statue }}</span></td>
             </tr>
             <tr>
                 <th>TypeCompte</th>
@@ -45,15 +45,15 @@
             </tr>
             <tr>
                 <th>CinS1</th>
-                <td><img src="{{ asset('uploads/carteBancaire/'~ compte.cinS1 ) }}" width="250" height="150"/></td>
+                <td><img src="{{ asset('uploads/compte/'~ compte.cinS1 ) }}" width="250" height="150"/></td>
             </tr>
             <tr>
                 <th>CinS2</th>
-                <td><img src="{{ asset('uploads/carteBancaire/'~ compte.cinS2 ) }}" width="250" height="150"/></td>
+                <td><img src="{{ asset('uploads/compte/'~ compte.cinS2 ) }}" width="250" height="150"/></td>
             </tr>
             <tr>
                 <th>OtherDoc</th>
-                <td><img src="{{ asset('uploads/carteBancaire/'~ compte.otherDoc ) }}" width="250" height="150"/></td>
+                <td><img src="{{ asset('uploads/compte/'~ compte.otherDoc ) }}" width="250" height="150"/></td>
             </tr>
             <tr>
                 <th>MaxSolde</th>
@@ -67,13 +67,9 @@
                 <th>RedSolde</th>
                 <td>{{ compte.redSolde }}</td>
             </tr> 
-            <tr>
-                <th>Status</th>
-                <td>{{ compte.statue }}</td>
-            </tr>
+           
         </tbody>
     </table>
-    {{ include('compte/_delete_form.html.twig') }}
                     </div>
                   </div>
                 </div>

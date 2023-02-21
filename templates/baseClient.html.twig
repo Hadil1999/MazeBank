@@ -56,7 +56,7 @@
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                     <a href="https://product.geniusocean.com/genius-bank">
-                        <img src="./assets/images/logo3.png"
+                        <img src="{{asset('assets/images/logo3.png')}}"
                             width="110" height="32" alt="Tabler" class="navbar-brand-image">
                     </a>
                 </h1>
@@ -221,7 +221,7 @@
 
                             <li class="nav-item ">
                                 <a class="nav-link"
-                                   href=" {{ path('wireTransfer_All') }}" >
+                                   href=" {{ path('app_transactions_index') }}" >
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <i class="fas fa-tram"></i>
                                     </span>
@@ -245,24 +245,25 @@
                             </a>
                            <div class="dropdown-menu">
                                     <a
-                      class="dropdown-item"
-                   href=" {{ path('transaction_sendMoney') }}"  
-                    >
-                      Send Money
-                    </a>
+                                       class="dropdown-item"
+                                     {# href=" {{ path('transaction_sendMoney') }}"   #}
+                                        href=" {{ path('send_transactions_sendMoney') }}" 
+                                      >
+                                          Send Money
+                                   </a>
 
                     <a
                       class="dropdown-item"
                           href=" {{ path('beneficiaries') }}"  
                     >
-                      Beneficiary Manage NO
+                      Beneficiary Manage
                     </a>
 
                     <a
                       class="dropdown-item"
                              href=" {{ path('otherBanks') }}"  
                     >
-                      Other Bank Transfer NO
+                      Other Bank Transfer
                     </a>
 
                     <a
@@ -292,10 +293,7 @@
                                        href="{{path('All_comptes')}}">
                                         Yours
                                     </a>
-                                    <a class="dropdown-item"
-                                       href="{{path('All_comptes')}}">
-                                        Deposit
-                                    </a>
+                                   
 
 
                                 </div>
@@ -312,16 +310,9 @@
                                 </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item"
-                                        href="two-factor.html">
+                                        href="">
                                         2FA Security
                                     </a>
-
-
-                                    <a class="dropdown-item"
-                                        href="messages.html">
-                                        Support Tickets
-                                    </a>
-
                                     <a class="dropdown-item"
                                         href=" {{path('transactions')}}">
                                         Transactions

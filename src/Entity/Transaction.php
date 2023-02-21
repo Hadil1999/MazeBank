@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TransactionRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
@@ -22,8 +23,6 @@ class Transaction
     #[ORM\Column(length: 255)]
     private ?string $montant = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $dateTransaction = null;
 
     #[ORM\Column(length: 255)]
     private ?string $requestFrom = null;
@@ -36,6 +35,10 @@ class Transaction
 
     #[ORM\Column(length: 255)]
     private ?string $agenceName = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
+
 
     public function getId(): ?int
     {
@@ -74,18 +77,6 @@ class Transaction
     public function setMontant(string $montant): self
     {
         $this->montant = $montant;
-
-        return $this;
-    }
-
-    public function getDateTransaction(): ?string
-    {
-        return $this->dateTransaction;
-    }
-
-    public function setDateTransaction(string $dateTransaction): self
-    {
-        $this->dateTransaction = $dateTransaction;
 
         return $this;
     }
@@ -137,4 +128,17 @@ class Transaction
 
         return $this;
     }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
 }

@@ -15,11 +15,10 @@ class CompteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('idType')
+            ->add('idType') 
+            ->add('idUser')
             ->add('dateCreation')
             ->add('dateFermeture')
-            ->add('rib')
-            ->add('solde')
             ->add('cinS1', FileType::class, [
                
                 'mapped' => false,
@@ -71,7 +70,6 @@ class CompteType extends AbstractType
             ->add('maxSolde')
             ->add('minSolde')
             ->add('redSolde')
-            ->add('statue')
             ->add('save',SubmitType::class)
         ;
     }

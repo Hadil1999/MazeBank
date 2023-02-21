@@ -56,7 +56,7 @@
 				>
 					<div class="sidebar-brand-icon">
 						<img
-							src="./assets/images/logo.png"
+							src="{{asset('assets/images/logo.png')}}"
 						/>
 					</div>
 				</a>
@@ -159,7 +159,7 @@
 		
 		
                 <li class="nav-item">
-			                      <a class="nav-link"  href="{{path('wireTransfer_All_ADD')}}">
+			                      <a class="nav-link"  href="{{path('admin_transactions_index')}}">
 				                    <i class="fas fa-wallet"></i>
 				                    <span>Wire Transfer</span>
 			                     </a>
@@ -180,7 +180,7 @@
 						data-parent="#accordionSidebar"
 					>
 					    <div class="bg-white py-2 collapse-inner rounded">
-					     	<a class="collapse-item" href="{{path('typeCompte_index')}}">Accounts</a>
+					     	<a class="collapse-item" href="{{path('typeCompte_index')}}">Accounts Types</a>
 							<a class="collapse-item" href="{{path('all_deposits')}}">Accounts demands</a>
 							<a class="collapse-item" href="">Account Requests</a>
 						</div>

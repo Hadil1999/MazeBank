@@ -110,7 +110,7 @@ class TransactionController extends AbstractController
     }
 
   
-    #[Route('/transferHistory', name: 'transfer_history')]
+    #[Route('/transferHistory1', name: 'transfer_history123')]
     public function History(): Response
     {
         return $this->render('transaction/transferHistory.html.twig', [

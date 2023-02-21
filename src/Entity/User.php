@@ -25,8 +25,6 @@ class User
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateNaissance = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $numTel = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Agence::class)]
     private Collection $userAgence;
@@ -36,6 +34,18 @@ class User
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Compte::class)]
     private Collection $comptes;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $phone = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $adress = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $numCin = null;
 
     public function __construct()
     {
@@ -84,19 +94,7 @@ class User
 
         return $this;
     }
-
-    public function getNumTel(): ?string
-    {
-        return $this->numTel;
-    }
-
-    public function setNumTel(string $numTel): self
-    {
-        $this->numTel = $numTel;
-
-        return $this;
-    }
-
+  
     /**
      * @return Collection<int, Agence>
      */
@@ -186,4 +184,58 @@ class User
 
         return $this;
     }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }   
+
+    public function __toString(): string {    
+        return $this->nom . ' ' . $this->prenom .' CIN ' .$this->numCin;
+    }
+
+    public function getNumCin(): ?string
+    {
+        return $this->numCin;
+    }
+
+    public function setNumCin(string $numCin): self
+    {
+        $this->numCin = $numCin;
+
+        return $this;
+    }
+
+
 }

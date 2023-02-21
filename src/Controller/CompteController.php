@@ -28,8 +28,8 @@ class CompteController extends AbstractController
         ]);
     }
 
-    #[Route('/createAccount', name: 'compte_create', methods: ['GET', 'POST'])]
-    public function new(Request $request, CompteRepository $compteRepository,SluggerInterface $slugger): Response
+    #[Route('/createAccount/{type}', name: 'compte_create', methods: ['GET', 'POST'])]
+    public function new(Request $request, CompteRepository $compteRepository,SluggerInterface $slugger,$type): Response
     {
         $compte = new Compte();
         $form = $this->createForm(CompteType::class, $compte);
@@ -45,22 +45,21 @@ class CompteController extends AbstractController
                 $newFilename = $safeFilename.'.'.$image1->guessExtension();
                 try {
                     $image1->move(
-                        $this->getParameter('brochures_directory'),
+                        $this->getParameter('brochures_directory1'),
                         $newFilename
                     );
                 } catch (FileException $e) {
                 
                 }
               $compte->setCinS1($newFilename);
-            }
-            
+            }            
             if ($image2) {
                 $originalFilename = pathinfo($image2->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename.'.'.$image2->guessExtension();
                 try {
                     $image2->move(
-                        $this->getParameter('brochures_directory'),
+                        $this->getParameter('brochures_directory1'),
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -74,24 +73,26 @@ class CompteController extends AbstractController
                 $newFilename = $safeFilename.'.'.$image3->guessExtension();
                 try {
                     $image3->move(
-                        $this->getParameter('brochures_directory'),
+                        $this->getParameter('brochures_directory1'),
                         $newFilename
                     );
                 } catch (FileException $e) {
                 
                 }
               $compte->setOtherDoc($newFilename);
+             
             }
-            $compte->setRib("xxxxxx");   
-            $compte->setSolde("xxxxxx");
-            $compte->setSolde("in progress");
+            $compte->setRib("in progress...");   
+            $compte->setSolde("in progress...");
+            $compte->setStatue("in progress");
             $compteRepository->save($compte, true);
 
             return $this->redirectToRoute('All_comptes', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->renderForm('compte/create.html.twig', [
-            'compte' => $compte,            
+            'compte' => $compte,   
+            'type'=>$type,         
             'form' => $form,
         ]);
     }
@@ -112,7 +113,7 @@ class CompteController extends AbstractController
             $compteRepository->remove($compte, true);
         }
 
-        return $this->redirectToRoute('All_comptes', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('all_deposits', [], Response::HTTP_SEE_OTHER);
     }
     /***********Admin*******/ 
 
@@ -124,7 +125,7 @@ class CompteController extends AbstractController
         ]);
     }
     
-    #[Route('edit/{id}', name: 'compte_editAdmin', methods: ['GET', 'POST'])]
+    #[Route('/deposit/{id}', name: 'compte_Admin_Show', methods: ['GET', 'POST'])]
     public function validerCompte(Request $request, Compte $compte, CompteRepository $compteRepository): Response
     {
         $form = $this->createForm(CompteType::class, $compte);

@@ -11,13 +11,13 @@
                                 Overview
                             </div>
                             <h2 class="page-title">
-                                Wire Transfer
+                        Transactions
                             </h2>
                         </div>
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
 
-                                <a href=" {{ path('wireTransfer_create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                                <a href=" {{ path('app_transactions_new') }}" class="btn btn-primary d-none d-sm-inline-block">
                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
                                              Add Wire Transfer
                                 </a>
@@ -33,23 +33,51 @@
                         <div class="col-12">
                             <div class="card">
                             <div class="table-responsive">
-                                    <table class="table table-vcenter table-mobile-md card-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>Agance Name</th>
-                                                <th>Account Type</th>
-                                                <th>Account Number</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
-                                                <th>Details</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                         
-                                        
-                                        </tbody>
-                                    </table>
+   <table class="table table-vcenter table-mobile-md card-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Agance Name</th>
+                <th>Account Number</th>
+                <th>Amount</th> 
+                <th>Request From</th>
+                <th>Request To</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for transaction in transactions %}
+            <tr>
+                 <td>{{transaction.typeTransaction}}</td>
+                <td>{{ transaction.date ? transaction.date|date('Y-m-d') : '' }}</td>                
+                <td>{{ transaction.agenceName }}</td>
+                <td>{{ transaction.compte }}</td>
+                <td>{{ transaction.montant }}</td>
+                <td>{{ transaction.requestFrom }}</td>
+                <td>{{ transaction.requestTo }}</td>
+                {% if  transaction.statue == "valide" %}
+                   <td><span class="badge bg-success">{{ transaction.statue }}</span></td>
+               {% else %}
+                   <td><span class="badge bg-warning">{{ transaction.statue }}</span></td>
+               {% endif %}
+                <td class="row">
+                 <form method="post" action="{{ path('app_transactions_delete', {'id': transaction.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    {# <a class="btn text-danger" href="{{ path('app_transactions_show', {'id': transaction.id}) }}"> <i class="fa-sharp fa-regular fa-eye"></i></a> #}
+                    <a class="btn text-danger" href="{{ path('app_transactions_edit', {'id': transaction.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>                  
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ transaction.id) }}">
+                    <button class="btn text-danger"><i class="fa-sharp fa-solid fa-delete-left"></i></button>
+                 </form>                
+                </td>
+            </tr>            
+         {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+         {% endfor %}
+        </tbody>                                        
+    </table>
                             </div>
                                 <nav>
                                     <ul class="pagination"> 
@@ -63,7 +91,6 @@
                                         </li>
                                     </ul>
                                 </nav>
-
                             </div>
                         </div>
                     </div>
@@ -74,3 +101,4 @@
         </div>
         
 {% endblock %}
+

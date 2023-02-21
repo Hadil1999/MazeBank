@@ -1,12 +1,6 @@
 
-{{ form_start(form) }}
-                    <div class="form-group">
-                               {{form_label(form.idType,'Account Type : ',{'attr':{'class':'form-label'}})}}
-                               {{form_widget(form.idType ,{'attr':{'class':'form-select'}} ) }}         
-                              {# <input type="text"    class="form-control" value="{{type}}" />    #}
-
-                    </div>
                   
+     {#
                     <div class="card text-white bg-black col-sm-6 col-lg-12 mb-2 mt-4 " >
                       <div class="card-header"><h2> 1. Personal Information <b class="text-danger">***</b></h2></div>
                     </div>
@@ -98,12 +92,30 @@
                           />
                          </div>
                         </div>                    
-                    </div>
-
+                    </div> 
+    #}
+{{ form_start(form) }} 
                     <div class="card text-white bg-black col-sm-6 col-lg-12  " >
-                      <div class="card-header"><h2> 2. Account Information <b class="text-danger">***</b></h2></div>
+                      <div class="card-header"><h2> Account Information <b class="text-danger">***</b></h2></div>
                     </div>                  
                     <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group mb-3 mt-3">
+                               {{form_label(form.idType,'Account Type : ',{'attr':{'class':'form-label'}})}}
+                            {{ form_widget(form.idType, { 'attr': { 'class': 'form-select' }, 'value': type }) }}      
+                              {# <input type="text"    class="form-control" value="{{type}}" />    #}
+                        </div>
+                      </div>
+                        <div class="col-md-6">
+                        <div class="form-group mb-3 mt-3">
+                               {{form_label(form.idUser,'User : ',{'attr':{'class':'form-label'}})}}
+                               {{form_widget(form.idUser ,{'attr':{'class':'form-select'}} ) }}         
+                              {# <input type="text"    class="form-control" value="{{type}}" />    #}
+                        </div>
+                      </div>
+                   </div>
+                   
+                     <div class="row">
                       <div class="col-md-4">
                         <div class="form-group mb-3 mt-3">
                                 {{form_label(form.maxSolde,'Max Amount: ',{'attr':{'class':'form-label'}})}}
