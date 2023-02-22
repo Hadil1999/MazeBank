@@ -154,6 +154,19 @@ class TransactionsController extends AbstractController
         return $this->redirectToRoute('admin_transactions_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('reject/{id}', name: 'app_transactions_reject', methods: ['POST'])]
+    public function reject(Request $request, Transaction $transaction, TransactionRepository $transactionRepository): Response
+    {
+        if ($this->isCsrfTokenValid('reject'.$transaction->getId(), $request->request->get('_token'))) {
+              $transaction->setStatue('rejected');
+              $transactionRepository->save($transaction, true);
+
+        }
+
+        return $this->redirectToRoute('admin_transactions_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
   /*****Admin********** */
 
 

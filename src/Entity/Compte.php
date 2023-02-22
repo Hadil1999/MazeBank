@@ -59,6 +59,9 @@ class Compte
     #[ORM\Column(length: 255)]
     private ?string $statue = null;
 
+   
+   
+
     public function __construct()
     {
         $this->compteTransaction = new ArrayCollection();
@@ -258,4 +261,6 @@ class Compte
     public function __toString(): string {
         return $this->rib;
     }
+
+  
 }

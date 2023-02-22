@@ -31,7 +31,11 @@ class CompteController extends AbstractController
     #[Route('/createAccount/{type}', name: 'compte_create', methods: ['GET', 'POST'])]
     public function new(Request $request, CompteRepository $compteRepository,SluggerInterface $slugger,$type): Response
     {
-        $compte = new Compte();
+        $compte = new Compte();        
+        $dateCreation= new \DateTime('now');
+        $dateFermeture=new \DateTime('now');
+        $compte->setDateCreation($dateCreation);
+        $compte->setDateFermeture($dateFermeture);
         $form = $this->createForm(CompteType::class, $compte);
         $form->handleRequest($request);
 
@@ -107,7 +111,7 @@ class CompteController extends AbstractController
     
 
     #[Route('/delete/{id}', name: 'app_compte_delete', methods: ['POST'])]
-    public function deleteAdmin(Request $request, Compte $compte, CompteRepository $compteRepository): Response
+    public function deleteDU(Request $request, Compte $compte, CompteRepository $compteRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$compte->getId(), $request->request->get('_token'))) {
             $compteRepository->remove($compte, true);
@@ -116,6 +120,9 @@ class CompteController extends AbstractController
         return $this->redirectToRoute('all_deposits', [], Response::HTTP_SEE_OTHER);
     }
     /***********Admin*******/ 
+
+
+
 
     #[Route('/account_Deposit', name: 'all_deposits')]
     public function requestAccount(CompteRepository $compteRepository): Response
@@ -126,7 +133,7 @@ class CompteController extends AbstractController
     }
     
     #[Route('/deposit/{id}', name: 'compte_Admin_Show', methods: ['GET', 'POST'])]
-    public function validerCompte(Request $request, Compte $compte, CompteRepository $compteRepository): Response
+    public function Comptes(Request $request, Compte $compte, CompteRepository $compteRepository): Response
     {
         $form = $this->createForm(CompteType::class, $compte);
         $form->handleRequest($request);
@@ -142,5 +149,32 @@ class CompteController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/accept/{id}', name: 'app_compte_accept', methods: ['GET','POST'])]
+    public function acceptAccount(Request $request, Compte $compte, CompteRepository $compteRepository): Response
+    {
+        if ($this->isCsrfTokenValid('accept'.$compte->getId(), $request->request->get('_token'))) {
+            $compte->setStatue('valide');                    
+            $dateAcceptation=new \DateTime('now');
+            $compte->setDateAcceptation($dateAcceptation);
+            $compteRepository->save($compte, true);
+        }
+
+        return $this->redirectToRoute('all_deposits', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/reject/{id}', name: 'app_compte_reject', methods: ['POST'])]
+    public function rejectAccount(Request $request, Compte $compte, CompteRepository $compteRepository): Response
+    {
+        if ($this->isCsrfTokenValid('reject'.$compte->getId(), $request->request->get('_token'))) {
+            $compte->setStatue('rejected');          
+            $dateFermeture=new \DateTime('now');
+            $compte->setDateFermeture($dateFermeture);
+            $compteRepository->save($compte, true);
+        }
+
+        return $this->redirectToRoute('all_deposits', [], Response::HTTP_SEE_OTHER);
+    }
+
 
 }
