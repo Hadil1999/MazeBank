@@ -68,7 +68,7 @@ class BlogController extends AbstractController
         $blog = $doctrine->getRepository(Blog::class)->find($id);
         $form = $this->createForm(BlogType::class, $blog);
         $form->handleRequest($request);
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             // $em->persist($blog);
             $photo = $form->get('photo')->getData();
 
@@ -107,7 +107,7 @@ class BlogController extends AbstractController
         $blog = new Blog();
         $form = $this->createForm(BlogType::class, $blog);
         $form->handleRequest($request);
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             $photo = $form->get('photo')->getData();
 
             if ($photo) {

@@ -42,7 +42,7 @@ class AgenceController extends AbstractController
         $agence = new Agence();
         $form = $this->createForm(AgenceType::class, $agence);
         $form->handleRequest($request);
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             $photo = $form->get('photo')->getData();
 
             if ($photo) {
@@ -63,7 +63,7 @@ class AgenceController extends AbstractController
 
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
-                $blog->setPhoto($newFilename);
+                $agence->setPhoto($newFilename);
             }
             $em->persist($agence);
             $em->flush();
@@ -82,7 +82,7 @@ class AgenceController extends AbstractController
         $agence = $doctrine->getRepository(Agence::class)->find($id);
         $form = $this->createForm(AgenceType::class, $agence);
         $form->handleRequest($request);
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             // $em->persist($agence);
             $photo = $form->get('photo')->getData();
 

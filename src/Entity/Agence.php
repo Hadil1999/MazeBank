@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AgenceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AgenceRepository::class)]
 class Agence
@@ -11,15 +12,20 @@ class Agence
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    
     private ?int $id = null;
 
+
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Name is required")]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Description is required")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    
     private ?string $photo = null;
 
     public function getId(): ?int

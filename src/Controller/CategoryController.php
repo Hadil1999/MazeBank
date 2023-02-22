@@ -43,7 +43,7 @@ class CategoryController extends AbstractController
         $category = $doctrine->getRepository(Category::class)->find($id);
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             
             $em->flush();
             return $this->redirectToRoute('app_category');
@@ -60,7 +60,7 @@ class CategoryController extends AbstractController
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             
             $em->persist($category);
             $em->flush();

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BlogRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BlogRepository::class)]
 class Blog
@@ -14,9 +15,11 @@ class Blog
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Name is required")]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Description is required")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
@@ -26,6 +29,7 @@ class Blog
     private ?Category $category = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Details are required")]
     private ?string $details = null;
 
     public function getId(): ?int
