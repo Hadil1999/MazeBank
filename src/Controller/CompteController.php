@@ -155,8 +155,7 @@ class CompteController extends AbstractController
     {
         if ($this->isCsrfTokenValid('accept'.$compte->getId(), $request->request->get('_token'))) {
             $compte->setStatue('valide');                    
-            $dateAcceptation=new \DateTime('now');
-            $compte->setDateAcceptation($dateAcceptation);
+          
             $compteRepository->save($compte, true);
         }
 
