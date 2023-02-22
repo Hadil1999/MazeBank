@@ -117,7 +117,7 @@ class CompteController extends AbstractController
             $compteRepository->remove($compte, true);
         }
 
-        return $this->redirectToRoute('all_deposits', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('All_comptes', [], Response::HTTP_SEE_OTHER);
     }
     /***********Admin*******/ 
 

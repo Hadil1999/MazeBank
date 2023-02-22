@@ -155,14 +155,13 @@
               >
             </div>
           </div>
-        </li> #}
+        </li> #}		
 		
-		
-                <li class="nav-item">
-			                      <a class="nav-link"  href="{{path('admin_transactions_index')}}">
-				                    <i class="fas fa-wallet"></i>
-				                    <span>Wire Transfer</span>
-			                     </a>
+                  <li class="nav-item">
+			            <a class="nav-link"  href="{{path('admin_transactions_index')}}">
+				            <i class="fas fa-wallet"></i>
+				            <span>Wire Transfer</span>
+			            </a>
 		         </li>
 				 <li class="nav-item">
 		           <a class="nav-link collapsed"href="#"
@@ -182,36 +181,15 @@
 					    <div class="bg-white py-2 collapse-inner rounded">
 					     	<a class="collapse-item" href="{{path('typeCompte_index')}}">Accounts Types</a>
 							<a class="collapse-item" href="{{path('all_deposits')}}">Accounts demands</a>
-							<a class="collapse-item" href="">Account Requests</a>
-						</div>
-						
+						</div>						
 					</div>
-		       </li>		
+		         </li>		
                 <li class="nav-item">
-					<a
-						class="nav-link collapsed"
-						href="#"
-						data-toggle="collapse"
-						data-target="#requestmoney"
-						aria-expanded="true"
-						aria-controls="collapseTable"
-					>
+					<a class="nav-link"	href="{{path('moneyRequest_Ad')}}">
 						<i class="fas fa-donate"></i>
 						<span>Request Money</span>
 					</a>
-					<div
-						id="requestmoney"
-						class="collapse"
-						aria-labelledby="headingTable"
-						data-parent="#accordionSidebar"
-					>
-						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" href="{{path('moneyRequest_Ad')}}"
-								>All Money Request</a
-							>
-						</div>
-					</div>
-				</li>
+									</li>
 
 				<li class="nav-item">
 					<a class="nav-link" href="{{path('transactions_Ad')}}">
@@ -221,7 +199,7 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="">
+					<a class="nav-link" href="#">
 						<i class="fas fa-piggy-bank"></i>
 						<span>Deposits</span>
 					</a>

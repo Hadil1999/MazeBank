@@ -16,13 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class TransactionsController extends AbstractController
 {
     
-  #[Route('/transactionAdmin', name: 'admin_transactions_index', methods: ['GET'])]
+  #[Route('/wire_Transfer_Admin', name: 'admin_transactions_index', methods: ['GET'])]
   public function alltransactionAdmin(TransactionRepository $transactionRepository): Response
   {
       return $this->render('transactions/wireTransfer_Ad.html.twig', [          
           'transactions' => $transactionRepository->findAll(),
       ]);
   }
+  #[Route('/Money_Request_Admin', name: 'moneyRequest_Ad', methods: ['GET'])]
+    public function ALLMoneyRequest(TransactionRepository $transactionRepository): Response
+    {
+        return $this->render('transactions/moneyRequest_Ad.html.twig', [
+            'transactions' => $transactionRepository->findAll(),
+        ]);
+    }
 
     /******** Wire Transfer *********/
     #[Route('/wire_Transfer', name: 'app_transactions_index', methods: ['GET'])]
