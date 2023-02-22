@@ -15,8 +15,6 @@ use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
 {
     #[ORM\Column(type: 'string', nullable: true)]
@@ -50,6 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(message:"The email '{{ value }}' is not a valid email address.")]
     #[Assert\NotBlank(message:"Email is required")]
     private ?string $email = null;
 
@@ -60,6 +59,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Password is required")]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -69,6 +69,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private ?string $name = null;
 
     #[ORM\Column(type: Types::BIGINT)]
+    /**
+     * @Assert\Regex(
+     *     pattern="/^[0-9]{8}$/",
+     *     message="The phone number '{{ value }}' is not a valid phone number.",
+     *     groups={"registration"}
+     * )
+     */
     private ?string $phone = null;
 
     #[ORM\ManyToOne(inversedBy: 'ClientId')]
