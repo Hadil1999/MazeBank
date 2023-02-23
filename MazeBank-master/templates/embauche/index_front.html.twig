@@ -1,0 +1,43 @@
+{% extends 'baseClient.html.twig' %}
+
+{% block Embauche %} active {% endblock %}
+
+
+
+{% block body %}
+    <h1>Embauche index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Poste</th>
+                <th>Date_embauche</th>
+                <th>Salaire</th>
+                <th>Duree</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for embauche in embauches %}
+            <tr>
+                <td>{{ embauche.id }}</td>
+                <td>{{ embauche.poste }}</td>
+                <td>{{ embauche.dateEmbauche ? embauche.dateEmbauche|date('Y-m-d') : '' }}</td>
+                <td>{{ embauche.salaire }}</td>
+                <td>{{ embauche.duree }}</td>
+                <td>
+                    <a href="{{ path('app_embauche_show_front', {'id': embauche.id}) }}">show</a>
+                    <a href="{{ path('app_embauche_edit_front', {'id': embauche.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_embauche_new_front') }}">Create new</a>
+{% endblock %}
