@@ -15,10 +15,12 @@ class TypeCarte
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)]    
+    #[Assert\NotBlank(message:"ce champs est obligatoire !")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"ce champs est obligatoire !")]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'idtypecarte', targetEntity: CarteBancaire::class)]

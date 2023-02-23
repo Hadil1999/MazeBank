@@ -18,10 +18,8 @@ class CompteType extends AbstractType
         $builder
             ->add('idType') 
             ->add('idUser')
-            ->add('cinS1', FileType::class, [
-               
+            ->add('cinS1', FileType::class, [               
                 'mapped' => false,
-                'required' => true,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -34,10 +32,8 @@ class CompteType extends AbstractType
                     ])
                 ],             
              ])       
-            ->add('cinS2', FileType::class, [
-               
-                'mapped' => false,
-                'required' => true,
+            ->add('cinS2', FileType::class, [               
+                'mapped' => false,               
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -52,8 +48,7 @@ class CompteType extends AbstractType
             ])     
             ->add('otherDoc', FileType::class, [
                
-                'mapped' => false,
-                'required' => true,
+                'mapped' => false,               
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',

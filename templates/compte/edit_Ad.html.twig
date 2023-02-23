@@ -89,7 +89,23 @@
             </tr>
             <tr>
                 <th>Solde</th>
-                <td>{{ compte.solde }}</td>
+                <td><div> <span class="badge bg-warrning" >{{ compte.solde }}</span></div></td>
+            </tr>
+              <tr>
+                <th>RIB</th>
+                <td><div> <span class="badge bg-warrning" >{{ compte.rib }}</span></div></td>
+            </tr>
+             <tr>
+                <th>MaxSolde</th>
+                <td>{{ compte.maxSolde }}</td>
+            </tr>
+            <tr>
+                <th>MinSolde</th>
+                <td>{{ compte.minSolde }}</td>
+            </tr>
+            <tr>
+                <th>RedSolde</th>
+                <td>{{ compte.redSolde }}</td>
             </tr>
             <tr>
                 <th>Cin first side</th>
@@ -102,19 +118,7 @@
             <tr>
                 <th>Other documents</th>
                 <td><img src="{{ asset('uploads/compte/'~ compte.otherDoc ) }}" width="250" height="150"/></td>
-            </tr>
-            <tr>
-                <th>MaxSolde</th>
-                <td>{{ compte.maxSolde }}</td>
-            </tr>
-            <tr>
-                <th>MinSolde</th>
-                <td>{{ compte.minSolde }}</td>
-            </tr>
-            <tr>
-                <th>RedSolde</th>
-                <td>{{ compte.redSolde }}</td>
-            </tr>
+            </tr>           
             <tr>
               <th>Options </th>
               <td class='row'>

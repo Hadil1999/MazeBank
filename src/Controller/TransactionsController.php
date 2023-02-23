@@ -58,18 +58,20 @@ class TransactionsController extends AbstractController
         foreach ($agences as $agence) {
             $choices[$agence->getNom()] = $agence->getNom();
         }
-
         $transaction = new Transaction();
         $date = new \DateTime('now');
         $transaction->setDate($date);
         $transaction->setStatue('in progress');
         $transaction->setTypeTransaction("Wire Transfer ");
+
         $form = $this->createForm(TransactionType::class, $transaction,[
             'choices' => $choices,
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+               
+
             $transactionRepository->save($transaction, true);
 
             return $this->redirectToRoute('app_transactions_index', [], Response::HTTP_SEE_OTHER);
@@ -153,7 +155,7 @@ class TransactionsController extends AbstractController
     public function accept(Request $request, Transaction $transaction, TransactionRepository $transactionRepository): Response
     {
         if ($this->isCsrfTokenValid('accept'.$transaction->getId(), $request->request->get('_token'))) {
-              $transaction->setStatue('valide');
+              $transaction->setStatue('valide');             
               $transactionRepository->save($transaction, true);
 
         }

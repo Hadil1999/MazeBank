@@ -155,7 +155,9 @@ class CompteController extends AbstractController
     {
         if ($this->isCsrfTokenValid('accept'.$compte->getId(), $request->request->get('_token'))) {
             $compte->setStatue('valide');                    
-          
+            $randomInt = random_int(0, 99999999999999);
+            $randomString = str_pad($randomInt, 14, '0', STR_PAD_LEFT);
+            $compte->setRib($randomString);
             $compteRepository->save($compte, true);
         }
 

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TransactionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
 class Transaction
@@ -15,25 +16,33 @@ class Transaction
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'compteTransaction')]
+    
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?Compte $compte = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $typeTransaction = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)]    
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $montant = null;
 
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $requestFrom = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $requestTo = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $statue = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $agenceName = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

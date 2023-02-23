@@ -18,7 +18,7 @@
          <div class="row row-cards">
               <div class="col-12">                 
                   <div class="card-p5">
-                             {{form_start(form) }} 
+                          {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}
                                         <div class="form-group">
                                             <label class="form-label required">Bank card</label>
                                               {{form_label(form.idtypecarte,'type: ',{'attr':{'class':'form-label'}})}}
@@ -42,6 +42,7 @@
                                             </div>
                                         <div class="form-group mb-3">
                                     
+                    {{ form_errors(form.description) }}
                                               {{form_label(form.description,'Description: ',{'attr':{'class':'form-label'}})}}
                                               {{form_widget(form.description,{'attr':{'class':'form-control summernote'}})}}
 

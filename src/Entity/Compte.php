@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CompteRepository::class)]
 class Compte
@@ -26,37 +27,50 @@ class Compte
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateFermeture = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)]    
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $solde = null;
 
     #[ORM\ManyToOne(inversedBy: 'comptes')]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?User $idUser = null;
 
     #[ORM\ManyToOne(inversedBy: 'comptes')]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?TypeCompte $idType = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $cinS1 = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $cinS2 = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"This field is mandatory! and The file must be an image in PNG format.")]
+ 
     private ?string $otherDoc = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?int $maxSolde = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?int $minSolde = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?int $redSolde = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)]    
+    #[Assert\NotBlank(message:"The bank account number (RIB) is mandatory!, and must contain 14 digits.")]
+    #[Assert\Length(min:14 , max:14)]
     private ?string $rib = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $statue = null;
 
    

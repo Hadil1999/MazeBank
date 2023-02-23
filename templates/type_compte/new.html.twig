@@ -63,14 +63,14 @@
                           no-repeat scroll center center rgba(45, 45, 45, 0.5);
                       "
                     ></div>                          
-                 {{form_start(form)}}                       
+                 {{form_start(form,{'attr':{'novalidate':'novalidate'}})}}                     
 
                     <div class="form-group">
                            {{form_label(form.type,'Type : ',{'attr':{'class':'form-label'}})}}
                            {{form_widget(form.type,{'attr':{'class':'form-control'}})}}                
                     </div>
 
-                   <div class="form-group">
+                   <div class="form-group">                          
                           {{form_label(form.description,'Description : ',{'attr':{'class':'form-label'}})}}
                           {{form_widget(form.description,{'attr':{'class':'form-control'}})}}  
                     </div>

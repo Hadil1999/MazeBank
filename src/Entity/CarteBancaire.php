@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CarteBancaireRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CarteBancaireRepository::class)]
 class CarteBancaire
 {
@@ -20,6 +20,7 @@ class CarteBancaire
     private ?string $identifier = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"ce champs est obligatoire !")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
