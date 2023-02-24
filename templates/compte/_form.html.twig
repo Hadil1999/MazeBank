@@ -7,8 +7,7 @@
                       <div class="col-md-6">
                         <div class="form-group mb-3 mt-3">
                                {{form_label(form.idType,'Account Type : ',{'attr':{'class':'form-label'}})}}
-                            {{ form_widget(form.idType, { 'attr': { 'class': 'form-select' }, 'value': type }) }}      
-                              {# <input type="text"    class="form-control" value="{{type}}" />    #}
+                            {{ form_widget(form.idType, { 'attr': { 'class': 'form-select' } }) }}  
                         </div>
                       </div>
                         <div class="col-md-6">
@@ -71,9 +70,9 @@
                     <div class="row">
                        <div class="col-md-6" ></div>
                         <div class="col-md-3 bg-light" >
-                         <button type="Resset" class="btn btn-primary w-100">
+                         {# <button type="Resset" class="btn btn-primary w-100">
                           Resset
-                         </button>
+                         </button> #}
                        </div>
                        <div class="col-md-3 bg-light" >
                         {{form_widget(form.save,{'attr':{'class':'btn btn-success w-100'}})}}

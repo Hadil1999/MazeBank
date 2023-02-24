@@ -28,49 +28,44 @@ class Compte
     private ?\DateTimeInterface $dateFermeture = null;
 
     #[ORM\Column(length: 255)]    
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+   // #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $solde = null;
 
     #[ORM\ManyToOne(inversedBy: 'comptes')]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+   // #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?User $idUser = null;
 
     #[ORM\ManyToOne(inversedBy: 'comptes')]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+  //  #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?TypeCompte $idType = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $cinS1 = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?string $cinS2 = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"This field is mandatory! and The file must be an image in PNG format.")]
- 
+    #[ORM\Column(length: 255)] 
     private ?string $otherDoc = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+   // #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?int $maxSolde = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+  //  #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?int $minSolde = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+   // #[Assert\NotBlank(message:"This field is mandatory!")]
     private ?int $redSolde = null;
 
     #[ORM\Column(length: 255)]    
-    #[Assert\NotBlank(message:"The bank account number (RIB) is mandatory!, and must contain 14 digits.")]
-    #[Assert\Length(min:14 , max:14)]
+   // #[Assert\NotBlank(message:"The bank account number (RIB) is mandatory!, and must contain 14 digits.")]
     private ?string $rib = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+  //  #[Assert\NotBlank(message:"status is mandatory!")]
     private ?string $statue = null;
 
    

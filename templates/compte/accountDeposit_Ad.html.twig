@@ -38,7 +38,7 @@
                                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 190px;">Account Type</th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 185px;">Date Demands</th>
                                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 173px;">Client</th>      
-                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 173px;">Statue</th>                                       
+                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 173px;">Statue</th>                                   
                                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 173px;">Options</th>
                                         </tr>
 		                           </thead>
@@ -54,7 +54,7 @@
                                                 <td><span class="badge bg-danger">{{ compte.statue }}</span></td>
                                                 {% else %}
                                                 <td><span class="badge bg-warning">{{ compte.statue }}</span></td>                          
-                                                {% endif %}
+                                                {% endif %}                                             
                                                 <td>
                                                     <a href="{{path('compte_Admin_Show', {'id': compte.id})}}"class="btn btn-info btn-sm px-3"> <i class="fa-sharp fa-regular fa-eye"></i></a>
                                                     {# <a href="" class="btn btn-danger btn-sm px-3"><i class="fa-regular fa-square-minus"></i></a> #}

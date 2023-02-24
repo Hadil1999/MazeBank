@@ -62,7 +62,7 @@ class TransactionsController extends AbstractController
         $date = new \DateTime('now');
         $transaction->setDate($date);
         $transaction->setStatue('in progress');
-        $transaction->setTypeTransaction("Wire Transfer ");
+        $transaction->setTypeTransaction("Wire Transfer");
 
         $form = $this->createForm(TransactionType::class, $transaction,[
             'choices' => $choices,

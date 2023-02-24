@@ -30,11 +30,11 @@ class Transaction
 
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+    #[Assert\NotBlank(message:"This field is mandatory! and The Accout Request must 14 number!")]
     private ?string $requestFrom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+    #[Assert\NotBlank(message:"This field is mandatory! and The Accout Request must 14 number! ")]
     private ?string $requestTo = null;
 
     #[ORM\Column(length: 255)]
@@ -42,7 +42,7 @@ class Transaction
     private ?string $statue = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"This field is mandatory!")]
+    #[Assert\NotBlank(message:"This name of the agance is mandatory!")]
     private ?string $agenceName = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

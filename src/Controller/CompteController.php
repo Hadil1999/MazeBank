@@ -20,16 +20,10 @@ class CompteController extends AbstractController
 {
    /****USER****/
 
-    #[Route('/compte_all', name: 'All_comptes')]
-    public function index(CompteRepository $compteRepository): Response
-    {
-        return $this->render('compte/index.html.twig', [
-            'comptes' => $compteRepository->findAll(),
-        ]);
-    }
+   
 
-    #[Route('/createAccount/{type}', name: 'compte_create', methods: ['GET', 'POST'])]
-    public function new(Request $request, CompteRepository $compteRepository,SluggerInterface $slugger,$type): Response
+    #[Route('/createAccount', name: 'compte_create', methods: ['GET', 'POST'])]
+    public function new(Request $request, CompteRepository $compteRepository,SluggerInterface $slugger): Response
     {
         $compte = new Compte();        
         $dateCreation= new \DateTime('now');
@@ -96,8 +90,15 @@ class CompteController extends AbstractController
         
         return $this->renderForm('compte/create.html.twig', [
             'compte' => $compte,   
-            'type'=>$type,         
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/compte_all', name: 'All_comptes')]
+    public function index(CompteRepository $compteRepository): Response
+    {
+        return $this->render('compte/index.html.twig', [
+            'comptes' => $compteRepository->findAll(),
         ]);
     }
 
@@ -154,9 +155,10 @@ class CompteController extends AbstractController
     public function acceptAccount(Request $request, Compte $compte, CompteRepository $compteRepository): Response
     {
         if ($this->isCsrfTokenValid('accept'.$compte->getId(), $request->request->get('_token'))) {
-            $compte->setStatue('valide');                    
+            $compte->setStatue('valide');   
+            $compte->setSolde('0.0');                  
             $randomInt = random_int(0, 99999999999999);
-            $randomString = str_pad($randomInt, 14, '0', STR_PAD_LEFT);
+            $randomString = str_pad($randomInt, 14, '0');
             $compte->setRib($randomString);
             $compteRepository->save($compte, true);
         }

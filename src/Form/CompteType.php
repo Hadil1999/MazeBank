@@ -8,8 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+
 
 class CompteType extends AbstractType
 {
@@ -18,8 +19,10 @@ class CompteType extends AbstractType
         $builder
             ->add('idType') 
             ->add('idUser')
-            ->add('cinS1', FileType::class, [               
+            ->add('cinS1', FileType::class, [
+               
                 'mapped' => false,
+                'required' => true,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -32,8 +35,10 @@ class CompteType extends AbstractType
                     ])
                 ],             
              ])       
-            ->add('cinS2', FileType::class, [               
-                'mapped' => false,               
+            ->add('cinS2', FileType::class, [
+               
+                'mapped' => false,
+                'required' => true,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -48,7 +53,8 @@ class CompteType extends AbstractType
             ])     
             ->add('otherDoc', FileType::class, [
                
-                'mapped' => false,               
+                'mapped' => false,
+                'required' => true,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
