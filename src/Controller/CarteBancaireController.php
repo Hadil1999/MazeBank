@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -110,4 +113,17 @@ class CarteBancaireController extends AbstractController
 
         return $this->redirectToRoute('app_carte_bancaire_index', [], Response::HTTP_SEE_OTHER);
     }
+
+/*************************JSON********************************/
+#[Route('/AllCartesJson', name: 'list', methods: ['GET'])]
+public function allCartesJson(CarteBancaireRepository $carteBancaireRepository, SerializerInterface $serialiser): Response
+{
+   $cartes = $carteBancaireRepository->findAll();
+   $json=$serialiser->serialize($cartes ,'json',['groups'=>"typeCartes"]);
+   return new Response ($json);
+        
+}
+
+
+
 }

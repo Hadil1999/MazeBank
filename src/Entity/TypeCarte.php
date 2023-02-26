@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TypeCarteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TypeCarteRepository::class)]
@@ -13,13 +14,16 @@ class TypeCarte
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("typeCartes")]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]    
+    #[ORM\Column(length: 255)] 
+    #[Groups("typeCartes")]   
     #[Assert\NotBlank(message:"ce champs est obligatoire !")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("typeCartes")]
     #[Assert\NotBlank(message:"ce champs est obligatoire !")]
     private ?string $description = null;
 

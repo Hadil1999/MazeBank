@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/transactions')]
 class TransactionsController extends AbstractController
@@ -175,11 +178,65 @@ class TransactionsController extends AbstractController
         return $this->redirectToRoute('admin_transactions_index', [], Response::HTTP_SEE_OTHER);
     }
 
+ /*************************JSON********************************/
+    
+ #[Route('/AllTransactionsJson', name: 'listTransactions', methods: ['GET'])]
+ public function allTransactionsJson( TransactionRepository $repo  , SerializerInterface $serialiser)
+ {
+    $typesComptes = $repo->findAll();
+    $json=$serialiser->serialize($typesComptes ,'json',['groups'=>"transactions"]);
+    return new Response ($json);             
+ }
 
-  /*****Admin********** */
+ #[Route("/type/{id}", name: "typeCarte")]
+ public function typeTransactionsJson($id, NormalizerInterface $normalizer, TransactionRepository $repo)
+ {
+     $typeCompte = $repo->find($id);
+     $typeCompteNormalises = $normalizer->normalize($typeCompte, 'json', ['groups' => "transactions"]);
+     return new Response(json_encode($typeCompteNormalises));
+ }
 
+ #[Route("addTransactionsJson/new", name: "addTransactionsJson")]
+ public function addTransactionsJson(Request $req,   NormalizerInterface $Normalizer)
+ {
 
-  /****Admin********* */
+     $em = $this->getDoctrine()->getManager();
+     $typeCompte = new TypeCompte();
+     $typeCompte->setType($req->get('type'));
+     $typeCompte->setDescription($req->get('description'));
+     $em->persist($typeCompte);
+     $em->flush();
+
+     $jsonContent = $Normalizer->normalize($typeCompte, 'json', ['groups' => "transactions"]);
+     return new Response(json_encode($jsonContent));
+ }
+
+ #[Route("updateTransactionsJson/{id}", name: "updateTransactionsJson")]
+ public function updateTransactionsJson(Request $req, $id, NormalizerInterface $Normalizer)
+ {
+
+     $em = $this->getDoctrine()->getManager();
+     $typeCompte = $em->getRepository(TypeCompte::class)->find($id);
+     $typeCompte->setType($req->get('type'));
+     $typeCompte->setDescription($req->get('description'));
+
+     $em->flush();
+
+     $jsonContent = $Normalizer->normalize($typeCompte, 'json', ['groups' => 'transactions']);
+     return new Response("Type Compte  updated successfully " . json_encode($jsonContent));
+ }
+
+ #[Route("deleteTransactionsJson/{id}", name: "deleteTransactionsJson")]
+ public function deleteTransactionsJson(Request $req, $id, NormalizerInterface $Normalizer)
+ { 
+     $em = $this->getDoctrine()->getManager();
+     $typeCompte = $em->getRepository(TypeCompte::class)->find($id);
+     $em->remove($typeCompte);
+     $em->flush();
+     $jsonContent = $Normalizer->normalize($typeCompte, 'json', ['groups' => 'transactions']);
+     return new Response("Type Compte deleted successfully " . json_encode($jsonContent));
+ }
+/********************JSON******************** */
 
 
 

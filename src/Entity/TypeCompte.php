@@ -6,6 +6,7 @@ use App\Repository\TypeCompteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: TypeCompteRepository::class)]
 class TypeCompte
@@ -13,13 +14,16 @@ class TypeCompte
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("types")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("types")]
     #[Assert\NotBlank(message:"ce champs est obligatoire !")]
     private ?string $type = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("types")]
     #[Assert\NotBlank(message:"ce champs est obligatoire !")]
     private ?string $description = null;
 
