@@ -38,6 +38,15 @@ class CreditRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findByCategory($categoryId)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.creditCategory', 'c')
+            ->andWhere('c.id = :categoryId')
+            ->setParameter('categoryId', $categoryId)
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Credit[] Returns an array of Credit objects

@@ -17,9 +17,9 @@
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
 
-                                <a href=" {{ path('credit_create') }}" class="btn btn-primary d-none d-sm-inline-block">
+                                <a href=" {{ path('loans') }}" class="btn btn-primary d-none d-sm-inline-block">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-              Add loan
+              Ask for other loan
             </a>
                             </div>
                         </div>
@@ -38,51 +38,54 @@
                                             <tr>
                                                 <th>Date</th>
                                                 <th>Category</th>
-                                                <th>Account Number</th>
+                                                <th>User</th>
                                                 <th>Amount</th>
                                                 <th>Status</th>
-                                                <th>Details</th>
+                                                <th>actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                                {% for a in applies %}
+
                                             <tr>
                                                 <td data-label="Date">
                                                     <div>
-                                                        Sep 12, 2022
+                                                       {{a.createdAt|date}}
                                                     </div>
                                                 </td>
                                                 <td data-label="Category">
                                                     <div>
-                                                    Maladie                                                  
+                                                    {{ a.creditId }}                                                  
                                                      </div>
                                                 </td>
                                                 
-                                                <td data-label="Account Number">
+                                                <td data-label="user">
                                                     <div>
-                                                        04804324324
+                                                       {{ a.userId.nom }}
+                                                        {{ a.userId.prenom }}
                                                     </div>
                                                 </td>
                                                 <td data-label="Amount">
                                                     <div>
-                                                        20 MILLIONS
+                                                    {{ a.amount }}                                                  
                                                     </div>
                                                 </td>
                                                 <td data-label="Status">
                                                     <div>
-                                                        <span class="badge bg-warning">pending</span>
+                                                        <span class="badge bg-warning">{{ a.status }}</span>
                                                     </div>
                                                 </td>
 
-                                                <td data-label="Details">
-                                                    <div class="btn-list">
-                                                        <a  href=" {{ path('credit_details') }}"  class="btn btn-primary">
-                                                           Details
-                                                        </a>
-                                                    </div>
-                                                </td>
+                                                <td><div>
+                                                				<a class="btn btn-danger" href="{{path('calculateMonthlyPayment', {'id': a.id}) }})">Details</a>
+
+                                                                <div class="col-sm-12 col-md-4 "><a class="btn btn-primary" href="{{path('editapplyCredit', {'id': a.id})}}"> Edit</a></div>
+                                                                <div class="col-sm-12 col-md-4 "><a class="btn btn-primary" href="{{path('applyCredit_remove', {'id': a.id})}}"> Delete</a></div>
+                                                </div></td>
                                             </tr> 
                                              
-                                          
+                                              {% endfor %}
+
                                         </tbody>
                                     </table>
                             </div>

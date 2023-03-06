@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,18 +14,24 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("users")]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("users")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("users")]
     private ?string $prenom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups("users")]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("users")]
     private ?string $numTel = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Agence::class)]
@@ -34,10 +40,17 @@ class User
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Reclamation::class)]
     private Collection $userReclamation;
 
+    #[ORM\OneToMany(mappedBy: 'userId', targetEntity: DemandeCredit::class)]
+    private Collection $demandeCredits;
+
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
+
     public function __construct()
     {
         $this->userAgence = new ArrayCollection();
         $this->userReclamation = new ArrayCollection();
+        $this->demandeCredits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,6 +162,51 @@ class User
                 $userReclamation->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DemandeCredit>
+     */
+    public function getDemandeCredits(): Collection
+    {
+        return $this->demandeCredits;
+    }
+
+    public function addDemandeCredit(DemandeCredit $demandeCredit): self
+    {
+        if (!$this->demandeCredits->contains($demandeCredit)) {
+            $this->demandeCredits->add($demandeCredit);
+            $demandeCredit->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandeCredit(DemandeCredit $demandeCredit): self
+    {
+        if ($this->demandeCredits->removeElement($demandeCredit)) {
+            // set the owning side to null (unless already changed)
+            if ($demandeCredit->getUserId() === $this) {
+                $demandeCredit->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString(): string {    
+        return $this->id;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

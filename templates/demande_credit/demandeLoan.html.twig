@@ -24,35 +24,15 @@
                     "
                   ></div>
 
-                  <form
-                    action="https://product.geniusocean.com/genius-bank/user/wire-transfer/store"
-                    method="POST"
-                    enctype="multipart/form-data"
-                  >
-                    <input
-                      type="hidden"
-                      name="_token"
-                      value="vR3eXGkdlb2WWaaLMMakQUdvmL2t5FszaT4AsjYX"
-                    />
-                    <div class="form-group">
-                      <label class="form-label required">Category</label>
-                      <input
-                            type="text"
-                            id="country"
-                            name="country"
-                            class="form-control"
-                            autocomplete="off"
-                            placeholder="category selected"
-                            value=""
-                          />
-                    </div>
+                 
+                  
 
                     <div class="form-group  mb-3 mt-3">
                     <div class="col">
                     <h2 class="page-title">To Apply for this loan you must follow this process :</h2>
                     </div>
                     </div>
-                    <div class="card text-white bg-danger mb-3" >
+                    {# <div class="card text-white bg-danger mb-3" >
                       <div class="card-header">personal information</div>
                     </div>
                     
@@ -123,38 +103,24 @@
                      <div class="card text-white bg-danger mb-3" >
                       <div class="card-header">Loan informations</div>
                     </div>
-                    
+                     #}
                     
 
                     <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group mb-3 mt-3">
-                          <label class="form-label">Account Number</label>
-                          <input
-                            type="text"
-                            name="account_number"
-                            class="form-control"
-                            autocomplete="off"
-                            placeholder="Enter Account Number"
-                            value=""
-                          />
-                        </div>
-                      </div>
+                  {{form_start(form)}}
+                       <div class="col-md-6">                        
+                          {{form_label(form.creditId,'Category : ',{'attr':{'class':'form-label'}})}}
+                          {{ form_widget(form.creditId, {'attr': {'class': 'form-control'}, 'value': idCredit}) }}
+                       </div>
+                       <div class="col-md-6">                        
+                          {{form_label(form.userId,'User : ',{'attr':{'class':'form-label'}})}}
+                          {{ form_widget(form.userId, {'attr': {'class': 'form-control'}})}}
+                       </div>
 
                       <div class="col-md-6">
                         <div class="form-group mb-3 mt-3">
-                          <label class="form-label">Amount</label>
-                          <input
-                        name="amount"
-                        id="amount"
-                        class="form-control"
-                        autocomplete="off"
-                        placeholder="0.0"
-                        type="number"
-                        value=""
-                        min="1"
-                        required
-                      />
+                          {{form_label(form.amount,'Amount : ',{'attr':{'class':'form-label'}})}}
+                          {{form_widget(form.amount,{'attr':{'class':'form-control'}})}}
                         </div>
                       </div>
                     </div>
@@ -162,14 +128,8 @@
                     
 
                     <div class="form-group mb-3">
-                      <label class="form-label">Note</label>
-                      <textarea
-                        name="note"
-                        class="form-control nic-edit"
-                        cols="30"
-                        rows="5"
-                        placeholder="Note"
-                      ></textarea>
+                     {{form_label(form.note,'Note : ',{'attr':{'class':'form-label'}})}}
+                          {{form_widget(form.note,{'attr':{'class':'form-control'}})}}
                     </div>
 
                     <div class="card text-white bg-danger mb-3" >
@@ -183,11 +143,8 @@
                           <label class="form-label">Id card copy </label>
                           <h5>first side</h5>
                   
-                          <input
-                        class="form-control"
-                        type="file"
-                        class="form-control"
-                      />
+                                  {{form_widget(form.cin1,{'attr':{'class':'form-control'}})}}   
+
                         </div>
                       </div>
 
@@ -196,11 +153,8 @@
                           <label class="form-label"><br></label>
                           <h5>second side</h5>
                   
-                        <input
-                        class="form-control"
-                        type="file"
-                        class="form-control"
-                      />
+                                 {{form_widget(form.cin2,{'attr':{'class':'form-control'}})}}
+
                         </div>
                       </div>
                     </div>
@@ -210,8 +164,9 @@
                         Submit
                       </button>
                     </div>
-                    </div>
-                  </form>
+                    </div> 
+                    {{form_end(form)}}
+                  
                 </div>
               </div>
             </div>
