@@ -12,6 +12,12 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use App\Controller\Serializer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -45,14 +51,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("user")]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Email(message:"The email '{{ value }}' is not a valid email address.")]
     #[Assert\NotBlank(message:"Email is required")]
+    #[Groups("User")]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups("User")]
     private array $roles = [];
 
     /**
@@ -60,22 +69,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      */
     #[ORM\Column]
     #[Assert\NotBlank(message:"Password is required")]
+    #[Groups("User")]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]
+    #[Groups("User")]
     private $isVerified = false;
 
     #[ORM\Column(length: 255)]
+    #[Groups("User")]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::BIGINT)]
-    /**
-     * @Assert\Regex(
-     *     pattern="/^[0-9]{8}$/",
-     *     message="The phone number '{{ value }}' is not a valid phone number.",
-     *     groups={"registration"}
-     * )
-     */
+    #[ORM\Column(type: 'string', length: 20)]
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '/^\d+$/',
+        message: 'Phone number must contain only digits'
+    )]
+    #[Groups("User")]
     private ?string $phone = null;
 
     #[ORM\ManyToOne(inversedBy: 'ClientId')]
@@ -84,9 +95,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\OneToMany(mappedBy: 'ClientName', targetEntity: Reclamation::class)]
     private Collection $reclamations;
 
+
+    //RESET TOKEN
+    #[ORM\Column(type: 'string', length: 100, nullable: true)]
+    private $resetToken;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $status = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Notification::class)]
+    private Collection $Notifications;
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
+    }
+    //RESET
+
     public function __construct()
     {
         $this->reclamations = new ArrayCollection();
+        $this->Notifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -255,6 +291,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
             // set the owning side to null (unless already changed)
             if ($reclamation->getClientName() === $this) {
                 $reclamation->setClientName(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->Notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->Notifications->contains($notification)) {
+            $this->Notifications->add($notification);
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->Notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
             }
         }
 

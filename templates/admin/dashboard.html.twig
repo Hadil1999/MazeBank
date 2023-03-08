@@ -1,155 +1,8 @@
-{% extends 'base.html.twig' %}
-
-{% block dashboard %}
-<div class="Loader"
-        style="background: url(https://product.geniusocean.com/genius-bank/assets/images/33CiUFaI1641808748.gif) no-repeat scroll center center #FFF;">
-    </div>
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="dashboard.html">
-                <div class="sidebar-brand-icon">
-                    <img src="../assets/images/MAZE.png" alt="logo" />
-                </div>
-            </a>
-
-            <li class="nav-item">
-                <a class="nav-link" href="dashboard.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+{% extends 'base2.html.twig' %}
 
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#customer"
-                    aria-expanded="true" aria-controls="collapseTable">
-                    <i class="fas fa-user"></i>
-                    <span>Manage Customers</span>
-                </a>
-                <div id="customer" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="users.html">User
-                            List</a>
-                        
-                        <a class="collapse-item"
-                            href="users/withdraws.html">Withdraw Request
-                            <span class="badge badge-sm badge-danger badge-counter">210</span></a>
-                        
-                    </div>
-                </div>
-            </li>
+{% block body %}
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#loan" aria-expanded="true"
-                    aria-controls="collapseTable">
-                    <i class="fas fa-cash-register"></i>
-                    <span>Loan Management</span>
-                </a>
-                <div id="loan" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"
-                            href="loan-plans.html">Loan Plans</a>
-                        <a class="collapse-item" href="loan.html">All
-                            Loans</a>
-    
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dps" aria-expanded="true"
-                    aria-controls="collapseTable">
-                    <i class="fas fa-warehouse"></i>
-                    <span>Offer Management</span>
-                </a>
-                <div id="dps" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"
-                            href="investment.html">Investment</a>
-                        <a class="collapse-item" href="career.html">Career</a>
-                    </div>
-                </div>
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#wiretransfer"
-                    aria-expanded="true" aria-controls="collapseTable">
-                    <i class="fas fa-wallet"></i>
-                    <span>Wire Transfer</span>
-                </a>
-                <div id="wiretransfer" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"
-                            href="wire-transfers.html">Wire Transfer
-                            Bank</a>
-                        
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#requestmoney"
-                    aria-expanded="true" aria-controls="collapseTable">
-                    <i class="fas fa-donate"></i>
-                    <span>Request Money</span>
-                </a>
-                <div id="requestmoney" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"
-                            href="request-money.html">All Money Request</a>
-                        
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="transactions.html">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Transactions</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="deposits.html">
-                    <i class="fas fa-piggy-bank"></i>
-                    <span>Deposits</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#blog" aria-expanded="true"
-                    aria-controls="collapseTable">
-                    <i class="fas fa-fw fa-newspaper"></i>
-                    <span>Manage Blog</span>
-                </a>
-                <div id="blog" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        
-                        <a class="collapse-item" href="{{path('app_blog')}}">Posts</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{path('app_reclamation')}}">
-                    <i class="fas fa-vote-yea"></i>
-                    <span>Support Tickets</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="subscribers.html">
-                    <i class="fas fa-fw fa-users-cog"></i>
-                    <span>Subscribers</span></a>
-            </li>
-
-
-
-
-
-
-
-        </ul>
         <!--------------------------------------- Sidebar ------------------------------------------>
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
@@ -165,6 +18,38 @@
                             </a>
                         </li>
 
+                 {% block header_menu %}
+    <ul class="navbar-nav">
+        {# <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Notifications
+            </a>
+            <div class="dropdown-menu" aria-labelledby="notificationsDropdown">
+                {% for notification in notifications %}
+             
+                        <h6 class="fw-normal mb-0">{{ notification.message }} <a href="{{path('delete_notif',{'id':notification.id})}}">Read</a></h6>
+                
+                {% endfor %}
+            </div>
+        </li> #}
+        <li class="nav-item dropdown">
+
+    <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="notificationsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Notifications
+            </a>
+            <div class="dropdown-menu" aria-labelledby="notificationsDropdown">
+                {% for notification in notifications %}
+             
+                        <h6 class="fw-normal mb-0">{{ notification.message }} <a href="{{path('delete_notif',{'id':notification.id})}}">Delete</a></h6>
+                
+                {% endfor %}
+            </div>
+        </li>
+
+
+    </ul>
+{% endblock %}
 
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <li class="nav-item dropdown no-arrow">
@@ -634,4 +519,8 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+    {% block footer %}{% endblock %}
+   
 {% endblock  %}
+
+

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block main %}
+{% block body %}
 <!-- Header -->
     <header class="position-relative">
 
@@ -9,7 +9,7 @@
                 <div class="navbar-wrapper">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="assets/images/Stww4kQy1645001015.png" alt="logo" />
+                            <img src="assets/images/MAZE2.png" alt="logo" style="width:50px"/>
                         </a>
                     </div>
 
@@ -34,7 +34,7 @@
 
                             <li>
                                 <div class="btn__grp ms-lg-3">
-                                    <a href="user/login.html" class="cmn--btn">Login Now</a>
+                                    <a href="{{path('app_login')}}" class="cmn--btn">Login Now</a>
                                 </div>
                             </li>
                         </ul>

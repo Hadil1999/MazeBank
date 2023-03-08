@@ -17,9 +17,20 @@
 {% extends 'base.html.twig' %}
 
 
+{% block header %}{% endblock %}
+
+
+{% block footer %}{% endblock %}
 
 {% block body %}
-
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+</style>
 <div class="container">
   <div class="account-wrapper bg--body">
     <div class="row">

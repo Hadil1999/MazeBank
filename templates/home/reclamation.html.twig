@@ -1,165 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
-{% block reclamation %}
-<div
-      class="Loader"
-      style="
-        background: url(https://product.geniusocean.com/genius-bank/assets/images/33CiUFaI1641808748.gif)
-          no-repeat scroll center center #fff;
-      "
-    ></div>
-    <div id="wrapper">
-              <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{path('app_dashboard')}}">
-                <div class="sidebar-brand-icon">
-                    <img src="../assets/images/MAZE.png" alt="logo" />
-                </div>
-            </a>
+{% block body %}
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{path('app_dashboard')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#customer"
-                    aria-expanded="true" aria-controls="collapseTable">
-                    <i class="fas fa-user"></i>
-                    <span>Manage Customers</span>
-                </a>
-                <div id="customer" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">User
-                            List</a>
-                        
-                        <a class="collapse-item"
-                            href="#">Withdraw Request
-                            <span class="badge badge-sm badge-danger badge-counter">210</span></a>
-                        
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#loan" aria-expanded="true"
-                    aria-controls="collapseTable">
-                    <i class="fas fa-cash-register"></i>
-                    <span>Loan Management</span>
-                </a>
-                <div id="loan" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"
-                            href="#">Loan Plans</a>
-                        <a class="collapse-item" href="#">All
-                            Loans</a>
-    
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dps" aria-expanded="true"
-                    aria-controls="collapseTable">
-                    <i class="fas fa-warehouse"></i>
-                    <span>Offer Management</span>
-                </a>
-                <div id="dps" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"
-                            href="investment.html">Investment</a>
-                        <a class="collapse-item" href="#">Career</a>
-                    </div>
-                </div>
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#wiretransfer"
-                    aria-expanded="true" aria-controls="collapseTable">
-                    <i class="fas fa-wallet"></i>
-                    <span>Wire Transfer</span>
-                </a>
-                <div id="wiretransfer" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"
-                            href="#">Wire Transfer
-                            Bank</a>
-                        
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#requestmoney"
-                    aria-expanded="true" aria-controls="collapseTable">
-                    <i class="fas fa-donate"></i>
-                    <span>Request Money</span>
-                </a>
-                <div id="requestmoney" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item"
-                            href="#">All Money Request</a>
-                        
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Transactions</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="deposits.html">
-                    <i class="fas fa-piggy-bank"></i>
-                    <span>Deposits</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#blog" aria-expanded="true"
-                    aria-controls="collapseTable">
-                    <i class="fas fa-fw fa-newspaper"></i>
-                    <span>Manage Blog</span>
-                </a>
-                <div id="blog" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        
-                        <a class="collapse-item" href="{{path('app_blog')}}">Posts</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{path('app_reclamation')}}">
-                    <i class="fas fa-vote-yea"></i>
-                    <span>Support Tickets</span></a>
-            </li>
-            {# <li class="nav-item">
-              <a class="nav-link" href="{{path('app_agence')}}">
-                  <i class="fas fa-child"></i>
-                  <span>Agence</span></a>
-          </li> #}
-
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-users-cog"></i>
-                    <span>Subscribers</span></a>
-            </li>
-
-
-
-
-
-
-
-        </ul>
-        <!--------------------------------------- Sidebar ------------------------------------------>
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
           <!-- TopBar -->
@@ -260,13 +102,20 @@
                 
                 <div class="card mb-4">
                   <div class="table-responsive p-3">
-                    <table
+                    {# <table
                       id="geniustable"
                       class="table table-hover dt-responsive"
                       cellspacing="0"
                       width="100%"
-                    >
-                      <thead class="thead-light">
+                    > #}
+                      
+
+  <tr>
+
+<table id="reclamations-table" class="table table-hover dt-responsive"
+                      cellspacing="0"
+                      width="100%">
+<thead class="thead-light">
                         <tr>
                           <th>Client's Name</th>
                           <th>Reclamation Title</th>
@@ -277,22 +126,66 @@
                         </tr>
     
                       </thead>
-
-  <tr>
+  <tbody>
     {% for c in reclamations %}
     <tr>
-    <td>{{c.ClientName.name}}</td>
-    <td>{{c.name}}</td>
-    <td><p>{{ c.TypeReclamation.titre }}</p></td>
-  
-    <td>{{c.priorite}}</td>
-    <td>{{c.description}}</td>
-    <td><a href="{{path('remove_reclamation',{'id':c.id})}}">Delete</a> </td> 
-
+      <td>{{c.ClientName.Name}}</td>
+      <td>{{c.name}}</td>
+      <td>{{ c.TypeReclamation.titre }}</td>
+      <td>{{c.Priorite}}</td> 
+      <td>{{c.description}}</td>
+      <td><a href="{{path('remove_reclamation',{'id':c.id})}}">Delete</a> </td> 
     </tr>
     {% endfor %}
+  </tbody>
+     <button id="download-btn" type="button">Download CSV</button>
+
+</table>
+
+<style>
+  #download-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 0.25em;
+    cursor: pointer;
+  }
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script>
+  // Add a click event listener to the download button
+  document.getElementById('download-btn').addEventListener('click', function() {
+    // Generate a comma-separated values (CSV) string from the table data
+    var csvString = 'Client Name;Reclamation Title;Type;Priority;Description\n';
+    var rows = document.querySelectorAll('#reclamations-table tbody tr');
+    for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].querySelectorAll('td');
+      for (var j = 0; j < cells.length-1; j++) {
+        csvString += '"' + cells[j].textContent.trim().replace(/"/g, '""') + '";';
+      }
+      csvString += '\n';
+    }
+
+    // Download the CSV file
+    var link = document.createElement('a');
+    link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvString));
+    link.setAttribute('download', 'reclamations.csv');
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+</script>
+
                       
-                    </table>
+
                   </div>
                 </div>
               </div>
@@ -392,4 +285,14 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>
+
+
+    {# $(function() {
+            $(".btn-area").append('<div class="col-sm-12 col-md-4 text-right">'+
+                '<a class="btn btn-primary" href="https://product.geniusocean.com/genius-bank/admin/subscribers/download">'+
+            '<i class="fas fa-download"></i> Download'+
+            '</a>'+
+            '</div>');
+        }); #}
+        {% block footer %}{% endblock %}
 {% endblock %}

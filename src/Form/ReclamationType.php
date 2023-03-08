@@ -11,6 +11,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class ReclamationType extends AbstractType
 {  
@@ -19,7 +22,14 @@ class ReclamationType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('priorite')
+            ->add('priorite', ChoiceType::class, [
+                'choices' => [           
+                    'High' => 'HIGH',
+                    'Medium' => 'MEDIUM',
+                    'Low' => 'LOW',
+                ],
+                'placeholder' => 'URGENT',
+            ])
             ->add('TypeReclamation',EntityType::class,[
                 'class'=>TypeReclamation::class,
                 'choice_label'=>'titre'

@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>{% block title %}Maze Bank - All in Digital One Banking System{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
        <link rel="stylesheet" href="assets/front/css/bootstrap.min.css" />
        
 <script src="https://kit.fontawesome.com/3c64a1ca0d.js" crossorigin="anonymous"></script>
@@ -44,17 +43,126 @@
         {% endblock %}
     </head>
     <body>
-    {% block main %}{% endblock %}
-    {% block dashboard %}   {% endblock %}
-    {% block blog %}   {% endblock %}
-    {% block user %}   {% endblock %}
-    {% block login %}   {% endblock %}
-    {% block offer %}   {% endblock %}
-    {% block twofa %}   {% endblock %}
-        {% block body %}{% endblock %}
-    {% block register %}{% endblock %}
-    {% block reclamation %}{% endblock %}
-    {% block userreclamation %} {% endblock %}
+     {% block header %}
+          <!-- Header -->
+    <header class="position-relative">
+        
+        <div class="navbar-bottom">
+            <div class="container">
+                <div class="navbar-wrapper">
+                    <div class="logo">
+                        <a href="../index.html">
+                            <img src="../assets/images/MAZE2.png" alt="logo" style="width:50px"/>
+                        </a>
+                    </div>
+                    
+                    <div class="nav-toggle d-lg-none">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="nav-menu-area">
+                        <div class="menu-close text--danger d-lg-none">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <ul class="nav-menu">
+                            <li><a href="../index.html" target="_self">Home</a></li>
+                            <li><a href="../services.html" target="_self">Services</a></li>
+                            <li><a href="../blogs.html" target="_self">Blog</a></li>
+                            <li><a href="../about.html" target="_self">About</a></li>
+
+                            <li>
+                                <a href="../contact.html">Contact</a>
+                            </li>
+
+                            <li>
+                                <div class="btn__grp ms-lg-3">
+                                    <a href="login.html" class="cmn--btn">Login Now</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header -->
+    {% endblock %}
+    {% block body %}{% endblock %}
+    {% block footer %}
+    <footer class="bg--section">
+        <div class="footer-top position-relative">
+            <div class="container">
+                <div class="footer-wrapper">
+                    <div class="footer-logo">
+                        <a href="index.html">
+                            <img src="../assets/images/Qk6wE0dR1645001520.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="footer-links">
+                        <h5 class="title">About</h5>
+                        <ul>
+                            <li>
+                                <a href="../privacy.html">Privacy &amp; Policy</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="footer-links mobile-second-item">
+                        <h5 class="title">Contact</h5>
+                        <ul>
+                            <li>
+                                <a href="#0">3584 Hickory Heights Drive ,Hanover MD 21076, USA</a>
+                            </li>
+                            <li>
+                                <a href="admin%40geniusocean.html">admin@geniusocean.com</a>
+                            </li>
+                            <li>
+                                <a href="%2b12%203456%207890%201234.html">+12 3456 7890 1234</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-comunity">
+                        <h5 class="title">Community</h5>
+                        <ul class="social-icons justify-content-start mt-0 mb-4">
+                            <li>
+                                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+
+                            <li>
+                                <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                            </li>
+
+                            <li>
+                                <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+                            </li>
+                        </ul>
+                        <p>
+                            Stay Excited, Subscribe to our Newsletter </p>
+
+
+                        <form class="input-group mt-3 footer-input-group"
+                            action="https://product.geniusocean.com/genius-bank/subscriber" method="POST">
+                            <input type="hidden" name="_token" value="CxwJfHukZdKzLel0kUjduqwUBxRZZnQuluge7UIX"> <input
+                                type="email" name="email" class="form-control" placeholder="Your email address...">
+                            <button class="input-group-text bg--white border-0 text--base">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom position-relative pb-5">
+            <div class="container text-center">
+                <p>
+                    COPYRIGHT © 2019. All Rights Reserved By <a href="http://geniusocean.com/">GeniusOcean.com</a> </p>
+            </div>
+        </div>
+    </footer> 
+    {% endblock %}
+
     </body>
 <script src="{{asset('assets/front/js/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('assets/admin/js/bootstrap.bundle.min.js')}}"></script>
@@ -121,6 +229,4 @@
         );
       });
     </script>
-    {# <script src="assets/front/js/main.js"></script>
-    <script src="assets/front/js/custom.js"></script> #}
 </html>

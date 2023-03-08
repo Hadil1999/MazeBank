@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use App\Repository\ReclamationRepository;
+use App\Repository\UserRepository;
 use App\Repository\TypeReclamationRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Reclamation;
@@ -15,46 +16,140 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ReclamationType;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Notifier\Message\SmsMessage;
+use Symfony\Component\Notifier\TexterInterface;
+use App\Service\PdfService;
+use App\Entity\Notification;
+
 
 class HomeController extends AbstractController
-{
+{   
+    //HOME PAGE
     #[Route('/home', name: 'app_home')]
-    public function index(): Response
-    {
+    public function index(Security $security): Response
+    {   
+        if ($security->isGranted('ROLE_ADMIN')) {
+            return $this->render('admin/dashboard.html.twig');
+        }
+        if ($security->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('app_user_dashboard');
+        } 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
 
-    #[Route('/dashboard', name: 'app_dashboard')]
-    public function dashboard(): Response
-    {
-        return $this->render('admin/dashboard.html.twig');
+    //USER LIST PAGE
+    #[Route('/users-list', name: 'app_users_list')]
+    public function usersList(UserRepository $repo): Response
+    {   
+        $users = $repo->findAll();
+     return $this->render('home/users.html.twig',
+     ['users'=>$users
+     ]);
     }
-    #[Route('/blog', name: 'app_blog')]
-    public function blog(Security $security): Response
-    {      
+
+    #[Route('/generate-pdf', name: 'app_generate_pdf')]
+    public function generatePdfPersonne(PdfService $pdf, UserRepository $repo) {
+    //     $users = $repo->findAll();
+    //     $html = $this->renderView('home/user_table.html.twig', ['users'=>$users
+    // ]);
+    //     // $pdf->showPdfFile($html);
+    $users = $repo->findAll();
+    $html = $this->renderView('home/user_table.html.twig', ['users'=>$users]);
+
+    // Generate PDF
+    $pdfFile = $pdf->generateBinaryPDF($html);
+    $pdf->showPdfFile($html);
+    // // Save PDF to file
+    // $pdfFilePath = 'C:/Users/Mega-PC/Desktop/EE';
+    // file_put_contents($pdfFilePath, $pdfFile);
+
+    // // Return the PDF file as a download
+    // $response = new BinaryFileResponse($pdfFilePath);
+    $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, 'file.pdf');
+    return $response;
+    }
+
+    #[Route('/User/Status/{id}', name: 'Status')]
+    public function DisableOrEnableUser(ManagerRegistry $doctrine, $id): Response
+    {
+        $em = $doctrine->getManager();
+        $repo = $doctrine->getRepository(user::class);
+        $User = $repo->find($id);
+    
+        if ($User->getStatus() === 'enabled') {
+            $User->setStatus('disabled');
+        } elseif ($User->getStatus() === 'disabled') {
+            $User->setStatus('enabled');
+        }
+    
+        $em->persist($User);
+        $em->flush();
+    
+        return $this->redirectToRoute('app_users_list');
+    }
+
+    //ADMIN DASHBOARD
+    #[Route('/dashboard', name: 'app_dashboard')]
+    public function dashboard(Security $security): Response
+    {      $notifications = $this->getDoctrine()->getRepository(Notification::class)->findAll();
+
         if ($security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('app_admin');
+            return $this->render('admin/dashboard.html.twig', [
+                'controller_name' => 'AdminController',
+                'notifications' => $notifications,
+            ]);
         }
         if ($security->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_user_dashboard');
         } 
-        
-        return $this->render('home/blog.html.twig');
+
+        return $this->redirectToRoute('app_login');
     }
 
+    // #[Route('/blog', name: 'app_blog')]
+    // public function blog(Security $security): Response
+    // {      
+    //     if ($security->isGranted('ROLE_ADMIN')) {
+    //         return $this->redirectToRoute('app_admin');
+    //     }
+    //     if ($security->isGranted('ROLE_USER')) {
+    //         return $this->redirectToRoute('app_user_dashboard');
+    //     } 
+        
+    //     return $this->render('home/blog.html.twig');
+    // }
+
     #[Route('/user-dashboard', name: 'app_user_dashboard')]
-    public function userDashboard(): Response
-    {
-        return $this->render('home/user_dashboard.html.twig');
+    public function userDashboard(Security $security, TexterInterface $texter): Response
+    {  
+        if ($security->isGranted('ROLE_ADMIN')) 
+        {
+        return $this->render('admin/dashboard.html.twig');
+        }
+        if ($security->isGranted('ROLE_USER')) {
+            return $this->render('home/user_dashboard.html.twig');
+            $sms = new SmsMessage(
+                // the phone number to send the SMS message to
+                '+21698999110',
+                // the message
+                'A new login was detected!'
+            );
+    
+            $sentMessage = $texter->send($sms);
+        } 
+        
+        return $this->redirectToRoute('app_login');
     }
 
     #[Route('/admin', name: 'app_admin')]
     public function indexAdmin(): Response
-    {
+    {   $notifications = $this->getDoctrine()->getRepository(Notification::class)->findAll();
+
         return $this->render('admin/dashboard.html.twig', [
             'controller_name' => 'AdminController',
+            'notifications' => $notifications,
         ]);
     }
 
@@ -63,79 +158,5 @@ class HomeController extends AbstractController
     {
         return $this->render('home/offer.html.twig');
     }
-
-    //Reclamation
-    #[Route('/reclamation', name: 'app_reclamation')]
-    public function reclamation(ReclamationRepository $repo, Security $security, AuthenticationUtils $authenticationUtils): Response
-    {   
-        
-        if ($security->isGranted('ROLE_ADMIN')) {
-            // $reclamations = $repo->findAll();
-            $em = $this->getDoctrine()->getManager();
-            $query = $em->createQuery
-            (
-                 'SELECT r, rt
-                 FROM App:Reclamation r
-                 JOIN r.TypeReclamation rt
-                 '
-            );
-            $reclamations = $query->getResult();
-            return $this->render('home/reclamation.html.twig',
-    ['reclamations'=>$reclamations
-    ]);
-        }
-        if ($security->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('app_user_dashboard');
-        }
-        $lastUsername = $authenticationUtils->getLastUsername();
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-        return $this->redirectToRoute('app_login');
-
-    }
     
-    
-    #[Route('/reclamation/remove/{id}', name: 'remove_reclamation')]
-    public function removeReclamation(ManagerRegistry $doctrine,$id): Response
-    {
-        $em = $doctrine->getManager();
-        $reclamation = $doctrine->getRepository(Reclamation::class)->find($id);
-        
-            $em->remove($reclamation);
-            $em->flush();
-            return $this->redirectToRoute('app_reclamation');
-        
-    }
-    
-    // public function add(ManagerRegistry $doctrine,Request $req): Response {
-    //     $em = $doctrine->getManager();
-    //     $student = new Student();
-    //     $form = $this->createForm(StudentType::class,$student);
-    //     $form->handleRequest($req);
-    //     if($form->isSubmitted()){
-    //         $em->persist($student);
-    //         $em->flush();
-    //         return $this->redirectToRoute('student_fetch');
-    //     }
-    //     //$club->setName('club test persist');
-    //     //$club->setCreationDate(new \DateTime());
-    //     return $this->renderForm('student/add.html.twig',['form'=>$form]);
-    // }
-    #[Route('/messages', name: 'app_messages')]
-    public function messages(ManagerRegistry $doctrine,Request $req): Response
-    {   $user = $this->getUser();
-        $em = $doctrine->getManager();
-        $reclamation = new Reclamation();
-        $reclamation->setClientName($user);
-        $form = $this->createForm(ReclamationType::class,$reclamation);
-        $form->handleRequest($req);
-        if($form->isSubmitted()){
-            $em->persist($reclamation);
-            $em->flush();
-            return $this->redirectToRoute('app_messages');
-        }
-        return $this->renderForm('home/messages.html.twig', [
-            'form' => $form
-        ]);
-    }
 }

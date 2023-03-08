@@ -20,6 +20,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticator;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\TwoFactorFormRendererInterface;
 use App\Form\TwoFactorCodeFormType;
+use Symfony\Component\Serializer\SerializerInterface;
+use App\Repository\UserRepository;
+use App\Service\SendMailService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class RegistrationController extends AbstractController
@@ -32,7 +36,13 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, GoogleAuthenticatorInterface $authenticator): Response
+    public function register(
+        Request $request, 
+        UserPasswordHasherInterface $userPasswordHasher, 
+        EntityManagerInterface $entityManager, 
+        GoogleAuthenticatorInterface $authenticator,
+        SerializerInterface $serializer,
+        SendMailService $mail): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -45,25 +55,28 @@ class RegistrationController extends AbstractController
                     $user,
                     $form->get('password')->getData()
                 )
+                
             );
             $user->setRoles(["ROLE_USER"]);
 
             // $secret = $authenticator->generateSecret();
             $secret = "4MZ2BTQTMKZ4K5O4M7JDSTJDRDU2X2HKU54I7ST4GHCDSAWNUODQ";
             $user->setGoogleAuthenticatorSecret($secret);
-
+            $user->setStatus("enabled");
+            
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // // generate a signed url and email it to the user
-            // $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-            //     (new TemplatedEmail())
-            //         ->from(new Address('admin@mazebank.tn', 'Mehdi - Maze Bank'))
-            //         ->to($user->getEmail())
-            //         ->subject('Please Confirm your Email')
-            //         ->htmlTemplate('registration/confirmation_email.html.twig')
-            // );
-            // do anything else you need here, like send an email
+            $mail->send(
+                'no-reply@mazebank.tn',
+                $user->getEmail(),
+                'Activation de votre compte',
+                'register',
+                compact('user')
+            );
+
+            $json = $serializer->serialize($user, 'json',['groups'=>'user']);
+         
 
             return $this->redirectToRoute('app_login');
         }
@@ -92,4 +105,80 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+    
+    #[Route('/list', name: 'list')]
+    public function getUsers(UserRepository $repo,SerializerInterface $serializerInterface): Response 
+    {
+        $Users =$repo->findAll();
+        // $json=$serializerInterface.serialize($Users,'json',['gourps'=>'students']); 
+        // $jsonEncoder = new JsonEncoder();
+        // $serializer = new Serializer([$normalizer], [$jsonEncoder]);
+        $json = $serializerInterface->serialize($Users, 'json', [
+            'groups' => ['User']
+        ]);
+        
+        dump($json);
+        die;
+
+    }
+
+    // #[Route('/add', name: 'add_user', methods:['POST'])]
+    // public function adduser(Request $request,SerializerInterface $serializer,EntityManagerInterface $em) : Response 
+    // {
+
+    //     $content=$request->getContent();
+    //     $user=$serializer->deserialize($content, User::class, 'json');
+    //     $em->persist($user);
+    //     $em->flush();
+    //     return new Response('user added successfully');
+    // }
+    #[Route('/add', name: 'add_user', methods:['POST'])]
+public function adduser(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response 
+{
+    $content = $request->getContent();
+    $user = $serializer->deserialize($content, User::class, 'json');
+    
+    $user->setPassword(
+        $userPasswordHasher->hashPassword(
+            $user,
+            $user->getPassword()
+        )
+    );
+    
+    $em->persist($user);
+    $em->flush();
+    
+    return new Response('user added successfully');
+}
+
+
+    #[Route('/user/signin', name: 'app_loging', methods: ['GET'])]
+public function signinAction(Request $request, SerializerInterface $serializer): Response
+{
+    $email = $request->query->get("email");
+    $password = $request->query->get("password");
+
+    $em = $this->getDoctrine()->getManager();
+    $user = $em->getRepository(User::class)->findOneBy(['email' => $email]);
+
+    if ($user) {
+        if (password_verify($password, $user->getPassword())) {
+            $data = $serializer->serialize($user, 'json', ['groups' => 'User']);
+            return new Response($data, 200, [
+                'Content-Type' => 'application/json'
+            ]);
+        } else {
+            return new Response(json_encode(['message' => 'password not found']), 404, [
+                'Content-Type' => 'application/json'
+            ]);
+        }
+    } else {
+        return new Response(json_encode(['message' => 'user not found']), 404, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
+}
+
+
+
 }

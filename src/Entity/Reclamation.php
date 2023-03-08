@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\ReclamationRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\serializer\Normalizer\NormalizerInterface;
 
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class Reclamation
@@ -12,21 +14,28 @@ class Reclamation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("reclamations")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Title is required")]
+    #[Groups("reclamations")]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Description is required")]
+    #[Groups("reclamations")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Required")]
+    #[Groups("reclamations")]
     private ?string $Priorite = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reclamations')]
+    #[ORM\ManyToOne(targetEntity: TypeReclamation::class, inversedBy: 'reclamations')]
     private ?TypeReclamation $TypeReclamation = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reclamations')]
+    #[ORM\ManyToOne(targetEntity: User::class,inversedBy: 'reclamations')]
     private ?user $ClientName = null;
 
     public function getId(): ?int

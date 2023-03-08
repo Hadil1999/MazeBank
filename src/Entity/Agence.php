@@ -6,6 +6,11 @@ use App\Repository\AgenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use App\Controller\Serializer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AgenceRepository::class)]
 class Agence
@@ -16,13 +21,20 @@ class Agence
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("User")]
     private ?string $Name = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups("User")]
+    private ?string $photo = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Description = null;
 
     #[ORM\OneToMany(mappedBy: 'AgencyName', targetEntity: User::class)]
     private Collection $ClientId;
+
+
 
     public function __construct()
     {
@@ -84,6 +96,17 @@ class Agence
                 $clientId->setAgencyName(null);
             }
         }
+
+        return $this;
+    }
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }
