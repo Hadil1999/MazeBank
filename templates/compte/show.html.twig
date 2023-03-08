@@ -24,8 +24,12 @@
                 <td>{{ compte.dateFermeture ? compte.dateFermeture|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Solde</th>
-                <td>{{ compte.solde }}</td>
+                <th>Solde</th>                
+                {% if compte.solde == "in progress..." %} 
+                <td ><span class="badge">{{ compte.solde }}</span></td> 
+                {% else %}
+                <td>{{ compte.solde }}</td>                          
+                {% endif %}
             </tr>
             <tr>
                 <th>CinS1</th>

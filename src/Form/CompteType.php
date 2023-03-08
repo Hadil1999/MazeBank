@@ -19,8 +19,7 @@ class CompteType extends AbstractType
         $builder
             ->add('idType') 
             ->add('idUser')
-            ->add('cinS1', FileType::class, [
-               
+            ->add('cinS1', FileType::class, [               
                 'mapped' => false,
                 'required' => true,
                 'constraints' => [

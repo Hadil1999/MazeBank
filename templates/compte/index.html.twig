@@ -9,6 +9,18 @@
               <div class="col">
                 <h2 class="page-title">My Accounts</h2>
               </div>
+              <div class="col">
+              
+                <form  class="row"action="{{ path('allcompteFiltre') }}" method="get">                     
+                      <select class="col form-control" name="type" id="type">
+                          <option value="all">All </option>
+                        {% for type in typecompte %}
+                           <option value="{{ type.id }}">{{ type.type }}</option>
+                       {% endfor %}
+                     </select>
+                    <button type="submit"class="col-2 btn btn-primary ">Filter</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -44,9 +56,13 @@
                           <td data-label="Account Closed Date">
                             <div>{{ compte.dateFermeture ? compte.dateFermeture|date('Y-m-d') : '' }}</div>
                           </td>
+                          {% if compte.solde == "in progress..." %} 
                           <td data-label="Account solde">
-                            <div>{{ compte.solde }}</div>
-                          </td>
+                            <div><span class="badge">{{ compte.solde }}</span></div>
+                          </td>              
+                          {% else %}
+                          <td>{{ compte.solde }}</td>                          
+                          {% endif %}
                           <td data-label="Account solde Red">
                             <div>{{ compte.redSolde }}</div>
                           </td>

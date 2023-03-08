@@ -1,200 +1,158 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}MAZE BANK{% endblock %}</title>
-   
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  
-    <link rel="shortcut icon"   href="{{asset('assets/images/icon2.png')}}">  
-    <script src="https://kit.fontawesome.com/3c64a1ca0d.js" crossorigin="anonymous"></script> 
-  
-   <link href="{{asset('assets/admin/vendor/fontawesome-free/css/all.min.css')}}"    rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/admin/css/toastr.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/admin/css/select2.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/admin/css/tagify.css')}}" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{asset('  assets/admin/css/summernote.css')}}"/>
-    <link href="{{asset('assets/admin/css/bootstrap-colorpicker.css')}}"  rel="stylesheet"/>
-    <link href="{{asset('assets/admin/css/bootstrap-iconpicker.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/admin/css/color-picker.css')}}" rel="stylesheet"/>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}MAZE BANK
+			{% endblock %}
+		</title>
 
-    <link href="{{asset('assets/admin/css/plugin.css')}}" rel="stylesheet" />
-    <link href="{{asset('assets/admin/css/ruang-admin.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/admin/css/custom.css')}}"  rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
 
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+		<link rel="shortcut icon" href="{{asset('assets/images/icon2.png')}}">
+		<script src="https://kit.fontawesome.com/3c64a1ca0d.js" crossorigin="anonymous"></script>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
- 
-	<div
-		 class="Loader"
-			style="
-				background: url(https://product.geniusocean.com/genius-bank/assets/images/33CiUFaI1641808748.gif)
-					no-repeat scroll center center #fff;
-			"
-		></div> 
-		<div id="wrapper">
- 
+		<link href="{{asset('assets/admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css"/>
+		<link href="{{asset('assets/admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+		<link href="{{asset('assets/admin/css/toastr.css')}}" rel="stylesheet"/>
+		<link href="{{asset('assets/admin/css/select2.min.css')}}" rel="stylesheet"/>
+		<link href="{{asset('assets/admin/css/tagify.css')}}" rel="stylesheet"/>
+		<link rel="stylesheet" href="{{asset('assets/admin/css/summernote.css')}}"/>
+		<link href="{{asset('assets/admin/css/bootstrap-colorpicker.css')}}" rel="stylesheet"/>
+		<link href="{{asset('assets/admin/css/bootstrap-iconpicker.css')}}" rel="stylesheet"/>
+		<link href="{{asset('assets/admin/css/color-picker.css')}}" rel="stylesheet"/>
 
-      
-         {#------------------------ Sidebar ----------------------------- #}
-			<ul
-				class="navbar-nav sidebar sidebar-light accordion"
-				id="accordionSidebar"
-			>
-				<a
-					class="sidebar-brand d-flex align-items-center justify-content-center"
-					href="dashboard.html"
-				>
+		<link href="{{asset('assets/admin/css/plugin.css')}}" rel="stylesheet"/>
+		<link href="{{asset('assets/admin/css/ruang-admin.css')}}" rel="stylesheet">
+		<link href="{{asset('assets/admin/css/custom.css')}}" rel="stylesheet">
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+
+		<div class="Loader" style="
+																															background: url(https://product.geniusocean.com/genius-bank/assets/images/33CiUFaI1641808748.gif)
+																																no-repeat scroll center center #fff;
+																														"></div>
+		<div
+			id="wrapper">
+
+
+			{#------------------------ Sidebar ----------------------------- #}
+			<ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
 					<div class="sidebar-brand-icon">
-						<img
-							src="{{asset('assets/images/logo.png')}}"
-						/>
+						<img src="{{asset('assets/images/logo.png')}}"/>
 					</div>
 				</a>
 
 				<li class="nav-item">
-					<a class="nav-link" href="dashboard.html">
+					<a class="nav-link" href="{{asset('app_admin')}}">
 						<i class="fas fa-fw fa-tachometer-alt"></i>
-						<span>Dashboard</span></a
-					>
+						<span>Dashboard</span>
+					</a>
 				</li>
 
 				<li class="nav-item">
-					<a
-						class="nav-link collapsed"
-						href="#"
-						data-toggle="collapse"
-						data-target="#customer"
-						aria-expanded="true"
-						aria-controls="collapseTable"
-					>
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#customer" aria-expanded="true" aria-controls="collapseTable">
 						<i class="fas fa-user"></i>
 						<span>Manage Customers</span>
 					</a>
-					<div
-						id="customer"
-						class="collapse"
-						aria-labelledby="headingTable"
-						data-parent="#accordionSidebar"
-					>
+					<div id="customer" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<a class="collapse-item" href="users.html">User List</a>
 
-							<a class="collapse-item" href="users/withdraws.html"
-								>Withdraw Request
-								<span class="badge badge-sm badge-danger badge-counter"
-									>210</span
-								></a
-							>
+							<a class="collapse-item" href="users/withdraws.html">Withdraw Request
+								<span class="badge badge-sm badge-danger badge-counter">210</span>
+							</a>
 						</div>
 					</div>
 				</li>
 
 				<li class="nav-item">
-					<a
-						class="nav-link collapsed"
-						href="#"
-						data-toggle="collapse"
-						data-target="#loan"
-						aria-expanded="true"
-						aria-controls="collapseTable"
-					>
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#loan" aria-expanded="true" aria-controls="collapseTable">
 						<i class="fas fa-cash-register"></i>
 						<span>Loan Management</span>
 					</a>
-					<div
-						id="loan"
-						class="collapse"
-						aria-labelledby="headingTable"
-						data-parent="#accordionSidebar"
-					>
+					<div id="loan" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<a class="collapse-item" href="loan-plans.html">Loan Plans</a>
 							<a class="collapse-item" href="loan.html">All Loans</a>
 						</div>
 					</div>
 				</li>
-        {# <li class="nav-item">
-                  <a
-            class="nav-link collapsed"
-            href="#"
-            data-toggle="collapse"
-            data-target="#moneytransfer"
-            aria-expanded="true"
-            aria-controls="collapseTable"
-          >
-            <i class="fas fa-exchange-alt"></i>
-            <span>Money Transfer NO</span>
-          </a>
-		  
-          <div
-            id="moneytransfer"
-            class="collapse"
-            aria-labelledby="headingTable"
-            data-parent="#accordionSidebar"
-          >
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a
-                class="collapse-item"
-                href="https://product.geniusocean.com/genius-bank/admin/own-banks/transfer"
-                >Own Bank Transfer</a
-              >
-              <a
-                class="collapse-item"
-                href="https://product.geniusocean.com/genius-bank/admin/other-banks/transfer"
-                >Other Bank Transfer</a
-              >
-            </div>
-          </div>
-        </li> #}		
-		
-                  <li class="nav-item">
-			            <a class="nav-link"  href="{{path('admin_transactions_index')}}">
-				            <i class="fas fa-wallet"></i>
-				            <span>Wire Transfer</span>
-			            </a>
-		         </li>
-				 <li class="nav-item">
-		           <a class="nav-link collapsed"href="#"
-						data-toggle="collapse"
-						data-target="#account"
-						aria-expanded="true"
-						aria-controls="collapseTable">
-			           <i class="fa-solid fa-money-check-dollar"></i>
-			           <span>Accounts</span>
-			        </a>
-			        <div
-						id="account"
-						class="collapse"
-						aria-labelledby="headingTable"
-						data-parent="#accordionSidebar"
-					>
-					    <div class="bg-white py-2 collapse-inner rounded">
-					     	<a class="collapse-item" href="{{path('typeCompte_index')}}">Accounts Types</a>
+				{# <li class="nav-item">
+																																				                  <a
+																																				            class="nav-link collapsed"
+																																				            href="#"
+																																				            data-toggle="collapse"
+																																				            data-target="#moneytransfer"
+																																				            aria-expanded="true"
+																																				            aria-controls="collapseTable"
+																																				          >
+																																				            <i class="fas fa-exchange-alt"></i>
+																																				            <span>Money Transfer NO</span>
+																																				          </a>
+																																						  
+																																				          <div
+																																				            id="moneytransfer"
+																																				            class="collapse"
+																																				            aria-labelledby="headingTable"
+																																				            data-parent="#accordionSidebar"
+																																				          >
+																																				            <div class="bg-white py-2 collapse-inner rounded">
+																																				              <a
+																																				                class="collapse-item"
+																																				                href="https://product.geniusocean.com/genius-bank/admin/own-banks/transfer"
+																																				                >Own Bank Transfer</a
+																																				              >
+																																				              <a
+																																				                class="collapse-item"
+																																				                href="https://product.geniusocean.com/genius-bank/admin/other-banks/transfer"
+																																				                >Other Bank Transfer</a
+																																				              >
+																																				            </div>
+																																				          </div>
+																																				        </li> #}
+
+				<li class="nav-item">
+					<a class="nav-link" href="{{path('admin_transactions_index')}}">
+						<i class="fas fa-wallet"></i>
+						<span>Wire Transfer</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#account" aria-expanded="true" aria-controls="collapseTable">
+						<i class="fa-solid fa-money-check-dollar"></i>
+						<span>Accounts</span>
+					</a>
+					<div
+						id="account" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+						{# 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 #}
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="{{path('typeCompte_index')}}">Accounts Types</a>
 							<a class="collapse-item" href="{{path('all_deposits')}}">Accounts demands</a>
-						</div>						
+						</div>
 					</div>
-		         </li>		
-                <li class="nav-item">
-					<a class="nav-link"	href="{{path('moneyRequest_Ad')}}">
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{path('moneyRequest_Ad')}}">
 						<i class="fas fa-donate"></i>
 						<span>Request Money</span>
 					</a>
-									</li>
+				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="{{path('transactions_Ad')}}">
+					<a class="nav-link" href="{{path('app_compte_statistiques')}}">
 						<i class="fas fa-chart-line"></i>
-						<span>Transactions</span>
+						<span>Statistiques</span>
 					</a>
 				</li>
 
@@ -206,23 +164,11 @@
 				</li>
 
 				<li class="nav-item">
-					<a
-						class="nav-link collapsed"
-						href="#"
-						data-toggle="collapse"
-						data-target="#blog"
-						aria-expanded="true"
-						aria-controls="collapseTable"
-					>
+					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#blog" aria-expanded="true" aria-controls="collapseTable">
 						<i class="fas fa-fw fa-newspaper"></i>
 						<span>Manage Blog</span>
 					</a>
-					<div
-						id="blog"
-						class="collapse"
-						aria-labelledby="headingTable"
-						data-parent="#accordionSidebar"
-					>
+					<div id="blog" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<a class="collapse-item" href="blog.html">Posts</a>
 						</div>
@@ -231,29 +177,25 @@
 				<li class="nav-item">
 					<a class="nav-link" href="ticket.html">
 						<i class="fas fa-vote-yea"></i>
-						<span>Support Tickets</span></a
-					>
+						<span>Support Tickets</span>
+					</a>
 				</li>
 
 				<li class="nav-item">
 					<a class="nav-link" href="subscribers.html">
 						<i class="fas fa-fw fa-users-cog"></i>
-						<span>Subscribers</span></a
-					>
+						<span>Subscribers</span>
+					</a>
 				</li>
 			</ul>
 			{#------------------------------- Sidbar--------------------- #}
-   
+
 			<div id="content-wrapper" class="d-flex flex-column">
-				<div id="content">
+				<div
+					id="content">
 					<!-- TopBar -->
-					   <nav
-					    	class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top"
-					    >
-						<button
-							id="sidebarToggleTop"
-							class="btn btn-link rounded-circle mr-3"
-						>
+					<nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+						<button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
 							<i class="fa fa-bars"></i>
 						</button>
 						<ul class="navbar-nav ml-auto">
@@ -265,28 +207,11 @@
 
 							<div class="topbar-divider d-none d-sm-block"></div>
 							<li class="nav-item dropdown no-arrow">
-								<a
-									class="nav-link dropdown-toggle"
-									href="#"
-									id="userDropdown"
-									role="button"
-									data-toggle="dropdown"
-									aria-haspopup="true"
-									aria-expanded="false"
-								>
-									<img
-										class="img-profile rounded-circle"
-										src="https://product.geniusocean.com/genius-bank/assets/images/1639300861admin.jpg"
-										style="max-width: 60px"
-									/>
-									<span class="ml-2 d-none d-lg-inline text-white small"
-										>Admin</span
-									>
+								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<img class="img-profile rounded-circle" src="https://product.geniusocean.com/genius-bank/assets/images/1639300861admin.jpg" style="max-width: 60px"/>
+									<span class="ml-2 d-none d-lg-inline text-white small">Admin</span>
 								</a>
-								<div
-									class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-									aria-labelledby="userDropdown"
-								>
+								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 									<a class="dropdown-item" href="#">
 										<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 										Profile
@@ -297,53 +222,48 @@
 									</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#">
-										<i
-											class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
-										></i>
+										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 										Logout
 									</a>
 								</div>
 							</li>
 						</ul>
-				    	</nav>
+					</nav>
 					<!-- Topbar -->
 
-						  {% block body %}
-                          {% endblock %}
+					{% block body %}{% endblock %}
 					{# <!-- Container Fluid-->
-					<div class="container-fluid" id="container-wrapper">
-						
-					</div>
-					<!---Container Fluid--> #}
+																																																		<div class="container-fluid" id="container-wrapper">
+																																																			
+																																																		</div>
+																																																		<!---Container Fluid--> #}
 				</div>
 			</div>
 
-</div>
+		</div>
 
-    <script type="text/javascript">
-        'use strict';
-        var form_error = "Please fill all the required fields";
-        var mainurl = "https://product.geniusocean.com/genius-bank";
-        var admin_loader = 1;
-    </script>
+		<script type="text/javascript">
+			'use strict';
+var form_error = "Please fill all the required fields";
+var mainurl = "https://product.geniusocean.com/genius-bank";
+var admin_loader = 1;
+		</script>
 
-    <script src="{{asset('assets/admin/vendor/jquery/jquery.min.js')}}"></script>
-    <script
-        src="{{asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script
-        src="{{asset('assets/admin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/plugin.js')}}"></script>
-    <script src="{{asset('assets/admin/js/chart.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/toastr.js')}}"></script>
-    <script src="{{asset('assets/admin/js/bootstrap-colorpicker.js')}}"></script>
-    <script src="{{asset('assets/admin/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/colorpicker.js')}}"></script>
-    <script src="{{asset('assets/admin/js/select2.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/tagify.js')}}"></script>
-    <script src="{{asset('assets/admin/js/summernote.js')}}"></script>
-    <script src="{{asset('assets/admin/js/sortable.js')}}"></script>
-    <script src="{{asset('assets/admin/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/bootstrap-datepicker.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/ruang-admin.js')}}"></script>
-    </body>
+		<script src="{{asset('assets/admin/vendor/jquery/jquery.min.js')}}"></script>
+		<script src="{{asset('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+		<script src="{{asset('assets/admin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/plugin.js')}}"></script>
+		<script src="{{asset('assets/admin/js/chart.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/toastr.js')}}"></script>
+		<script src="{{asset('assets/admin/js/bootstrap-colorpicker.js')}}"></script>
+		<script src="{{asset('assets/admin/js/bootstrap-iconpicker.bundle.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/colorpicker.js')}}"></script>
+		<script src="{{asset('assets/admin/js/select2.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/tagify.js')}}"></script>
+		<script src="{{asset('assets/admin/js/summernote.js')}}"></script>
+		<script src="{{asset('assets/admin/js/sortable.js')}}"></script>
+		<script src="{{asset('assets/admin/js/bootstrap.bundle.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/bootstrap-datepicker.min.js')}}"></script>
+		<script src="{{asset('assets/admin/js/ruang-admin.js')}}"></script>
+	</body>
 </html>

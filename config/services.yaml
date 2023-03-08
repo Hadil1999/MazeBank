@@ -7,6 +7,12 @@ parameters:
   brochures_directory1: "%kernel.project_dir%/public/uploads/compte"
   brochures_directory2: "%kernel.project_dir%/public/uploads/carteBancaire"
 services:
+  twilio.client:
+    class: Twilio\Rest\Client
+    arguments: ["%twilio_sid%", "%twilio_token%"]
+
+  # Add an alias for the twilio.client service
+  Twilio\Rest\Client: "@twilio.client"
   # default configuration for services in *this* file
   _defaults:
     autowire: true # Automatically injects dependencies in your services.

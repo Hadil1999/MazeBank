@@ -3,24 +3,125 @@
 namespace App\Controller;
 
 use App\Entity\Compte;
+use App\Entity\TypeCompte;
 use App\Form\CompteType;
+use App\Form\CompteSearchType;
 use App\Repository\CompteRepository;
+use App\Repository\TypeCompteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use CMEN\GoogleChartsBundle\GoogleCharts\Options\PieChart\PieSlice;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
 
 
 #[Route('/compte')]
 class CompteController extends AbstractController
 {
-   /****USER****/
 
+    #[Route('/statistiques', name: 'app_compte_statistiques', methods: ['POST','GET'])]
+    public function statistiques(Request $request ,CompteRepository $compteRepository ,TypeCompteRepository $typeCompteRepository): Response
+    {       
+            $compte = new Compte();    
+            $comptes = []; 
+                $comptes = $compteRepository->getStat();
+                $prods = array (array("Type compte","Nombre de demandes de COMPTE"));
+               $i = 1;
+               foreach ($comptes as $prod){
+                   $prods[$i] = array($prod["type"],$prod["nbre"]);
+                   $i= $i + 1;
+               }   
+               $bar = new Barchart();
+               $pieChart = new Piechart();
+               $bar->getData()->setArrayToDataTable($prods);
+               $pieChart->getData()->setArrayToDataTable($prods);
+
+               $bar->getOptions()->setTitle('Statistique de nombre de Demandes de compte par Types');
+               $bar->getOptions()->getHAxis()->setTitle('Statistique de nombre de Demandes de compte par Types');
+               $bar->getOptions() ->getTitleTextStyle()->setColor('#CF0000');
+               $bar->getOptions()->getHAxis()->setMinValue(0);
+               $bar->getOptions()->setWidth(900);
+               $bar->getOptions()->setHeight(500);
    
+               $pieChart->getOptions()->setTitle('Statistique de nombre de Demandes par Types');
+               $pieChart->getOptions()->setHeight(400);
+               $pieChart->getOptions()->setWidth(400);
+               $pieChart->getOptions() ->getTitleTextStyle()->setColor('#CF0000');
+               $pieChart->getOptions()->getTitleTextStyle()->setFontSize(25);
+                
+           return $this->render('compte/comptes_chart.html.twig', [
+               'bar' => $bar,
+               'pieChart' => $pieChart,
+   
+           ]);
+    }
+    
+    #[Route('/search', name: 'ajax_search', methods: ['GET'])]
+    public function searchAction(Request $request, CompteRepository $charityDemandRepository): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $requestString = $request->get('q');
+
+        $charitydemands = $em->getRepository('App\Entity\Compte')->findEntitiesByString($requestString);
+
+        if (!$charitydemands) {
+            $result['charity_demands']['error'] = "NOT FOUND";
+        } else {
+            $result['charity_demands'] = $this->getRealEntities($charitydemands);
+        }
+
+        return new Response(json_encode($result));
+    }
+
+    public function getRealEntities($charitydemands)
+    {
+
+        foreach ($charitydemands as $charitydemand) {
+            $realEntities[$charitydemand->getId()] = $charitydemand->getStatue();
+        }
+        return $realEntities;
+    }
+    #[Route('/view', name: 'app_charity_demand_View', methods: ['GET', 'POST'])]
+    public function View(CompteRepository $charityDemandRepository,  Request $request): Response
+    {
+        $charitydemands = $charityDemandRepository->findAll();
+        $form = $this->createForm(CompteSearchType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $searchquery = $form->getData()['statue'];
+            $charitydemands = $charityDemandRepository->search($searchquery);
+        }
+        return $this->render('compte/search.html.twig', [
+            'charity_demands' => $charitydemands,
+            'form' => $form->createView()
+        ]);
+    }
+
+    // #[Route('/view', name: 'app_charity_demand_View', methods: ['GET', 'POST'])]
+    // public function View(CompteRepository $charityDemandRepository,  Request $request): Response
+    // {
+    //     $charitydemands = $charityDemandRepository->findAll();
+    //     $form = $this->createForm(DemandSearchType::class);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $searchquery = $form->getData()['statue'];
+    //         $charitydemands = $charityDemandRepository->search($searchquery);
+    //     }
+    //     return $this->render('compte/accountDeposit_Ad.html.twig', [
+    //         'comptes' => $charitydemands,
+    //         'form' => $form->createView()
+    //     ]);
+    // }
+    
+   /****USER****/   
 
     #[Route('/createAccount', name: 'compte_create', methods: ['GET', 'POST'])]
     public function new(Request $request, CompteRepository $compteRepository,SluggerInterface $slugger): Response
@@ -94,11 +195,34 @@ class CompteController extends AbstractController
         ]);
     }
 
-    #[Route('/compte_all', name: 'All_comptes')]
-    public function index(CompteRepository $compteRepository): Response
+    #[Route('/allCompteFiltre', name: 'allcompteFiltre')]
+    public function list(Request $request, CompteRepository $compteRepository)
     {
+        $type = $request->query->get('type');
+        
+        if ($type == 'all') {
+            $comptes = $compteRepository->findAll();
+        } else {
+            $comptes = $compteRepository->findByType($type);
+        }
+    
+        $typecompte = $this->getDoctrine()
+            ->getRepository(TypeCompte::class)
+            ->findAll();
+    
+        return $this->render('compte/index.html.twig', [
+            'comptes' => $comptes,
+            'typecompte' => $typecompte
+        ]);
+    }
+    
+    #[Route('/compte_all', name: 'All_comptes')]
+    public function index(CompteRepository $compteRepository, TypeCompteRepository $typeRepository ): Response
+    {
+        $typecompte= $typeRepository->findAll();
         return $this->render('compte/index.html.twig', [
             'comptes' => $compteRepository->findAll(),
+            'typecompte' => $typecompte,
         ]);
     }
 
@@ -121,8 +245,6 @@ class CompteController extends AbstractController
         return $this->redirectToRoute('All_comptes', [], Response::HTTP_SEE_OTHER);
     }
     /***********Admin*******/ 
-
-
 
 
     #[Route('/account_Deposit', name: 'all_deposits')]
@@ -160,9 +282,11 @@ class CompteController extends AbstractController
             $randomInt = random_int(0, 99999999999999);
             $randomString = str_pad($randomInt, 14, '0');
             $compte->setRib($randomString);
+        //send mail accept 
+
+
             $compteRepository->save($compte, true);
         }
-
         return $this->redirectToRoute('all_deposits', [], Response::HTTP_SEE_OTHER);
     }
 
@@ -178,6 +302,7 @@ class CompteController extends AbstractController
 
         return $this->redirectToRoute('all_deposits', [], Response::HTTP_SEE_OTHER);
     }
+   
 
 
 }

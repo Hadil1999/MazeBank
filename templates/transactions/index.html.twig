@@ -53,15 +53,21 @@
                  <td>{{transaction.typeTransaction}}</td>
                 <td>{{ transaction.date ? transaction.date|date('Y-m-d') : '' }}</td>                
                 <td>{{ transaction.agenceName }}</td>
-                <td>{{ transaction.compte }}</td>
+                {% if transaction.compte == "in progress..." %}                   
+                    <td><span class="badge">{{ transaction.compte }}</span></td>                
+                {% else %}
+                    <td>{{ transaction.compte }}</td>                          
+                {% endif %}
                 <td>{{ transaction.montant }}</td>
                 <td>{{ transaction.requestFrom }}</td>
                 <td>{{ transaction.requestTo }}</td>
                 {% if  transaction.statue == "valide" %}
-                   <td><span class="badge bg-success">{{ transaction.statue }}</span></td>
-               {% else %}
-                   <td><span class="badge bg-warning">{{ transaction.statue }}</span></td>
-               {% endif %}
+                    <td><span class="badge bg-success">{{ transaction.statue }}</span></td>
+                {% elseif transaction.statue == "rejected" %}
+                <td><span class="badge bg-danger">{{ transaction.statue }}</span></td>
+                {% else %}
+                    <td><span class="badge bg-warning">{{ transaction.statue }}</span></td>                          
+                {% endif %}
                 <td class="row">
                  <form method="post" action="{{ path('app_transactions_delete', {'id': transaction.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                     {# <a class="btn text-danger" href="{{ path('app_transactions_show', {'id': transaction.id}) }}"> <i class="fa-sharp fa-regular fa-eye"></i></a> #}
