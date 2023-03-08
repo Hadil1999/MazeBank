@@ -10,16 +10,27 @@ use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\CategoryRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CategoryController extends AbstractController
 {
     #[Route('/categories', name: 'categories')]
-    public function getcategories(categoryRepository $repo):Response{
-        $categories=$repo->findAll();
+    public function getcategories(categoryRepository $repo,PaginatorInterface $paginator,Request $request):Response{
+        
+        $query = $repo->createQueryBuilder('c')
+        ->orderBy('c.name', 'DESC')
+        ->getQuery();
+        $categories = $paginator->paginate(
+        $query,
+        $request->query->getInt('page', 1),
+        2
+    );
         return $this->render('category/categories.html.twig', [
             'categories'=> $categories
         ]);
     }
+
 
     #[Route('/addcategory', name: 'category_add')]
     public function new(Request $request,ManagerRegistry $doctrine): Response

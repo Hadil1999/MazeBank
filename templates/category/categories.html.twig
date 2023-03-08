@@ -37,6 +37,7 @@
 			<tr role="row"><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 180px;">Name</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 175px;">Description</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 163px;">Options</th></tr>
 		  </thead>
 		<tbody>
+    
 		{% for c in categories %}
 
         <tr role="row" class="odd"><td tabindex="0">{{ c.name }}</td><td>{{ c.description }}</td>
@@ -48,8 +49,9 @@
 </td>
 </tr>
 							  {% endfor %}
+                                              	{{ knp_pagination_render(categories) }}
 
-                             </tbody></table><div id="geniustable_processing" class="dataTables_processing card" style="display: none;"><img src="https://product.geniusocean.com/genius-bank/assets/images/33CiUFaI1641808748.gif"></div></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="geniustable_info" role="status" aria-live="polite">Showing 1 to 6 of 6 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="geniustable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="geniustable_previous"><a href="#" aria-controls="geniustable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="geniustable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="geniustable_next"><a href="#" aria-controls="geniustable" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+                             </tbody></table>
 	  </div>
 	</div>
   </div>
