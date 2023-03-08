@@ -57,7 +57,7 @@
                 <div class="navbar-wrapper">
     <div class="logo">
         <a href="../index.html">
-            <img src="../assets/images/Stww4kQy1645001015.png" alt="logo" />
+            <img src="../assets/images/MAZE.png" alt="logo" />
         </a>
     </div>
     <div class="change-language d-sm-none ms-auto me-3 text--title">
@@ -192,8 +192,53 @@
                             Register Now                        </button>
 {{ form_end(registrationForm) }} #}
 
+
+
+{# {{ form_start(registrationForm) }}
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{ form_row(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-sm-6">
+            {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+        
+            {{ form_row(registrationForm.phone, {'attr': {'class': 'form-control'}}) }}
+
+
+        </div>
+          <div class="col-sm-6">
+    <label for="{{ registrationForm.AgencyName.vars.id }}">Agency Name</label>
+    {{ form_widget(registrationForm.AgencyName, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(registrationForm.AgencyName)}}
+            </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+           {{ form_row(registrationForm.password.first, {'attr': {'class': 'form-control'}} ) }}
+        </div>
+        <div class="col-sm-6">
+           {{ form_row(registrationForm.password.second,  {'attr': {'class': 'form-control'}})  }}
+        </div>
+    </div>
+    
+        <div class="mt-2">
+                        <div class="form-check mt-3 mb-0">
+                            <input type="checkbox" id="accept" class="form-check-input" checked>
+                            <label class="form-check-label" for="accept">Accept <a href="#0"
+                                    class="text--base">privacy & policy</a></label>
+                        </div>
+        </div>
+        <button type="submit" class="cmn--btn bg--base me-3 w-100">Register Now</button>
+{{ form_end(registrationForm) }} #}
+
 {{ form_start(registrationForm) }}
-   
+
     <div class="row">
         <div class="col-sm-6">
             {{ form_row(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
@@ -211,8 +256,8 @@
           <div class="col-sm-6">
     <label for="{{ registrationForm.AgencyName.vars.id }}">Agency Name</label>
     {{ form_widget(registrationForm.AgencyName, {'attr': {'class': 'form-control'}}) }}
-    {{ form_errors(registrationForm.AgencyName)}}
-            </div>
+    {{ form_errors(registrationForm.AgencyName, {'attr': {'class': 'form-control'}}) }}
+</div>
     {# </div> #}
         {# <div class="col-sm-6">
             {{ form_row(registrationForm.AgencyName, {'attr': {'class': 'form-label'}}) }}
@@ -239,10 +284,10 @@
     </div> #}
     <div class="row">
     <div class="col-sm-6">
-        {{ form_row(registrationForm.password.first, {'attr': {'class': 'form-control'}} ) }}
+        {{ form_row(registrationForm.password.first, {'attr': {'class': 'form-control'}}) }}
     </div>
     <div class="col-sm-6">
-        {{ form_row(registrationForm.password.second,  {'attr': {'class': 'form-control'}})  }}
+        {{ form_row(registrationForm.password.second, {'attr': {'class': 'form-control'}}) }}
     </div>
 </div>
     
@@ -253,7 +298,9 @@
                                     class="text--base">privacy & policy</a></label>
                         </div>
         </div>
+
         <button type="submit" class="cmn--btn bg--base me-3 w-100">Register Now</button>
+
 {{ form_end(registrationForm) }}
 
     </div>

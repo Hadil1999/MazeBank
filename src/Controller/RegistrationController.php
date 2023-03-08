@@ -48,7 +48,8 @@ class RegistrationController extends AbstractController
             );
             $user->setRoles(["ROLE_USER"]);
 
-            $secret = $authenticator->generateSecret();
+            // $secret = $authenticator->generateSecret();
+            $secret = "4MZ2BTQTMKZ4K5O4M7JDSTJDRDU2X2HKU54I7ST4GHCDSAWNUODQ";
             $user->setGoogleAuthenticatorSecret($secret);
 
             $entityManager->persist($user);
