@@ -14,10 +14,12 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("categories")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Name is required")]
+    #[Groups("categories")]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Blog::class)]
@@ -25,6 +27,7 @@ class Category
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Decsription is required")]
+    #[Groups("categories")]
     private ?string $description = null;
 
     public function __construct()

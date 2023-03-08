@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Category;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use App\Validator\Constraints\InappropriateWords;
 
 class BlogType extends AbstractType
 {
@@ -18,7 +20,11 @@ class BlogType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description', TextareaType::class, [
+                'constraints' => [
+                    new InappropriateWords()
+                ]
+            ])
             ->add('category',EntityType::class,[
                  'class'=>Category::class,
                  'choice_label'=>'name'

@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use App\Validator\Constraints\InappropriateWords;
 
 class AgenceType extends AbstractType
 {
@@ -16,7 +18,11 @@ class AgenceType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description', TextareaType::class, [
+                'constraints' => [
+                    new InappropriateWords()
+                ]
+            ])
             ->add('photo', FileType::class, [
                 'label' => 'Photo',
 

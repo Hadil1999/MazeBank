@@ -38,6 +38,17 @@ class BlogRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findByName($search)
+    {
+        $qb = $this->createQueryBuilder('b')
+            ->andWhere('b.name LIKE :name')
+            ->setParameter('name', '%'.$search.'%')
+            ->orderBy('b.id', 'ASC');
+    
+        return $qb->getQuery()
+                  ->getResult();
+    }
+
 
 //    /**
 //     * @return Blog[] Returns an array of Blog objects

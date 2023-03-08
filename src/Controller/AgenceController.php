@@ -4,13 +4,16 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\AgenceRepository;
+
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Agence;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Form\AgenceType;
+use Doctrine\ORM\EntityManagerInterface;
 
 class AgenceController extends AbstractController
 {
@@ -114,5 +117,27 @@ class AgenceController extends AbstractController
         ]);
     }
 
+    #[Route('/agence/download/{id}', name: 'app_agence_download')]
+    public function download(Request $request, EntityManagerInterface $entityManager, int $id)
+{
+    $agence = $entityManager->getRepository(Agence::class)->find($id);
+    // Create a new response object
+    $response = new Response();
 
+    // Set the content type and disposition headers
+    $response->headers->set('Content-Type', 'text/plain');
+    $response->headers->set('Content-Disposition', $response->headers->makeDisposition(
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        'agence-' . $agence->getId() . '.txt'
+    ));
+
+    // Build the text to be downloaded
+    $text = "Agency name : {$agence->getName()}\n";
+    $text .= "Agency description : {$agence->getDescription()}\n";
+    // Set the content of the response to the text to be downloaded
+    $response->setContent($text);
+
+    // Return the response
+    return $response;
+}
 }

@@ -1,228 +1,100 @@
-{% extends 'base.html.twig'%}
+{% extends 'base2.html.twig'%}
 
-{% block details %}
-
-
-    <!-- Header -->
-    
-        </div>
-        <div class="navbar-bottom">
-            <div class="container">
-                <div class="navbar-wrapper">
-    <div class="logo">
-        <a href="index.html">
-            <img src="{{asset('assets/images/Stww4kQy1645001015.png')}}" alt="logo" />
-        </a>
-    </div>
-    <div class="change-language d-sm-none ms-auto me-3 text--title">
-        <select name="language" class="language selectors nice language-bar">
-                            <option value="https://product.geniusocean.com/genius-bank/language/1" selected >
-                    EN
-                </option>
-                    </select>
-    </div>
-    <div class="nav-toggle d-lg-none">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div class="nav-menu-area">
-        <div class="menu-close text--danger d-lg-none">
-            <i class="fas fa-times"></i>
-        </div>
-        <ul class="nav-menu">
-                            <li><a href="#" target="_self">Home</a></li>
-                            <li><a href="#" target="_self">Services</a></li>
-                            <li><a href="{{path('app_blog')}}" target="_self">Blog</a></li>
-                            <li><a href="#" target="_self">About</a></li>
-            
-                            <li>
-                    <a href="#">Contact</a>
+{% block body %}
+<!-- Hero -->
+<section class="hero-section bg--overlay bg_img">
+    <div class="container">
+        <div class="hero-content">
+            <h2 class="hero-title">{{blog.name}}</h2>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Home</a>
                 </li>
-                        
-            <li>
-                <div class="btn__grp ms-lg-3">
-                                            <a href="#" class="cmn--btn">Login Now</a>
-                                    </div>
-            </li>
-        </ul>
+                <li>
+                    <a href="{{path('app_actualite')}}">Blogs</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>            </div>
-        </div>
-    </header>
-    <!-- Header -->
-    <!-- Hero -->
-    <section class="hero-section bg--overlay bg_img"
-        >
-        <div class="container">
-            <div class="hero-content">
-                <h2 class="hero-title">{{blog.name}}</h2>
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="{{path('app_actualite')}}">Blogs</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- Hero -->
+</section>
+<!-- Hero -->
 
-    <!-- Blog -->
-    <section class="blog-section pt-100 pb-100">
-        <div class="container">
-            <div class="row gy-5">
-                <div class="col-lg-8">
-                    <div class="blog__item blog__item-details">
-                        <div class="blog__item-img">
-                            <img src="{{asset('/uploads/photos/'~blog.photo)}}"
-                                alt="blog">
-                        </div>
-                        <div class="blog__item-content">
-                            <div class="d-flex flex-wrap justify-content-between meta-post">
-                                <span><i class="far fa-user"></i> Admin</span>
-                            </div>
-                            <h5 class="blog__item-content-title">
-                                {{blog.name}}
-                            </h5>
-                        </div>
-                        <div class="blog__details">
-                            <p>{{blog.details}}</p>
-                            <p>
-
-                            <div id="disqus_thread"></div>
-                        </div>
+<!-- Blog -->
+<section class="blog-section pt-100 pb-100">
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-8">
+                <div class="blog__item blog__item-details">
+                    <div class="blog__item-img">
+                        <img src="{{asset('/uploads/photos/'~blog.photo)}}" alt="blog">
                     </div>
-                </div>
-                <div class="col-xl-4">
-                    <aside class="blog-sidebar ps-xxl-5">
-                        <div class="widget">
-                            <div class="widget-header text-center">
-                                <h5 class="m-0 text-white">Latest Blog Posts</h5>
-                            </div>
-                            <div class="widget-body">
-                                <ul class="latest-posts">
-                                {% for i in blogs|slice(0,3) %}
-                                    <li>
-                                        <a
-                                            href="{{path('details_blog',{'id':i.id})}}">
-                                            <div class="img">
-                                                <img src="{{asset('/uploads/photos/'~i.photo)}}"
-                                                    alt="blog">
-                                            </div>
-                                            <div class="cont">
-                                                <h5 class="subtitle">{{i.name}}</h5>
-                                                <span class="date">{{i.description}}</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                                    
-                                </ul>
-                            </div>
+                    <div class="blog__item-content">
+                        <div class="d-flex flex-wrap justify-content-between meta-post">
+                            <span><i class="far fa-user"></i> Admin</span>
                         </div>
-                        <div class="widget">
-                            <div class="widget-header text-center">
-                                <h5 class="m-0 text-white">Category</h5>
-                            </div>
-                            <div class="widget-body">
-                                <ul class="archive-links">
-                                {% for c in categories %}
-                                    <li>
-                                        <a href="{{path('app_blog_category',{'id':c.id})}}">
-                                            <span>{{c.name}}</span>
-                                            <span>&nbsp;</span>
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                    
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    </aside>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Blog -->
-
-
-    <!-- Footer -->
-    <footer class="bg--section">
-        <div class="footer-top position-relative">
-            <div class="container">
-                <div class="footer-wrapper">
-                    <div class="footer-logo">
-                        <a href="index.html">
-                            <img src="{{asset('assets/images/Stww4kQy1645001015.png')}}"
-                                alt="logo">
-                        </a>
+                        <h5 class="blog__item-content-title">
+                            {{blog.name}}
+                        </h5>
                     </div>
-                    <div class="footer-links">
-                        <h5 class="title">About</h5>
-                        <ul>
-                            <li>
-                                <a href="https://product.geniusocean.com/genius-bank/privacy">Privacy &amp; Policy</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <div class="footer-links mobile-second-item">
-                        <h5 class="title">Contact</h5>
-                        <ul>
-                            <li>
-                                <a href="#0">3584 Hickory Heights Drive ,Hanover MD 21076, USA</a>
-                            </li>
-                            <li>
-                                <a href="admin@geniusocean.com">admin@geniusocean.com</a>
-                            </li>
-                            <li>
-                                <a href="+12 3456 7890 1234">+12 3456 7890 1234</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-comunity">
-                        <h5 class="title">Community</h5>
-                        <ul class="social-icons justify-content-start mt-0 mb-4">
-                            <li>
-                                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                            </li>
-
-                            <li>
-                                <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-                            </li>
-
-                            <li>
-                                <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
-                            </li>
-                        </ul>
+                    <div class="blog__details">
+                        <p>{{blog.details}}</p>
                         <p>
-                            Stay Excited, Subscribe to our Newsletter </p>
 
-
-                        <form class="input-group mt-3 footer-input-group"
-                            action="https://product.geniusocean.com/genius-bank/subscriber" method="POST">
-                            <input type="hidden" name="_token" value="XxPg1jnaXNzeyOLQ67y20e1GEmPZXfxZsqeeuIEj"> <input
-                                type="email" name="email" class="form-control" placeholder="Your email address...">
-                            <button class="input-group-text bg--white border-0 text--base">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
+                        <div id="disqus_thread"></div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom position-relative pb-5">
-            <div class="container text-center">
-                <p>
-                    COPYRIGHT © 2019. All Rights Reserved By <a href="http://geniusocean.com/">GeniusOcean.com</a> </p>
+            <div class="col-xl-4">
+                <aside class="blog-sidebar ps-xxl-5">
+                    <div class="widget">
+                        <div class="widget-header text-center">
+                            <h5 class="m-0 text-white">Latest Blog Posts</h5>
+                        </div>
+                        <div class="widget-body">
+                            <ul class="latest-posts">
+                                {% for i in blogs|slice(0,3) %}
+                                <li>
+                                    <a href="{{path('details_blog',{'id':i.id})}}">
+                                        <div class="img">
+                                            <img src="{{asset('/uploads/photos/'~i.photo)}}" alt="blog">
+                                        </div>
+                                        <div class="cont">
+                                            <h5 class="subtitle">{{i.name}}</h5>
+                                            <span class="date">{{i.description}}</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="widget-header text-center">
+                            <h5 class="m-0 text-white">Category</h5>
+                        </div>
+                        <div class="widget-body">
+                            <ul class="archive-links">
+                                {% for c in categories %}
+                                <li>
+                                    <a href="{{path('app_blog_category',{'id':c.id})}}">
+                                        <span>{{c.name}}</span>
+                                        <span>&nbsp;</span>
+                                    </a>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </aside>
             </div>
         </div>
-    </footer>
-    <!-- Footer -->
+    </div>
+</section>
+<!-- Blog -->
+
+
 
 {% endblock %}
