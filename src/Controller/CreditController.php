@@ -54,7 +54,7 @@ class CreditController extends AbstractController
     // }
     
     #[Route('/addLoanAdmin', name: 'addLoanAdmin')]
-    public function addLoanAdmin(Request $request,ManagerRegistry $doctrine,FlashyNotifier $flashy): Response
+    public function addLoanAdmin(Request $request,ManagerRegistry $doctrine): Response
     {
 
            $credit = new Credit();
