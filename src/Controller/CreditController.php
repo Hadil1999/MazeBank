@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,14 +13,23 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 class CreditController extends AbstractController
 {
 
     #[Route('/loanPlans', name: 'loanplans')]
-    public function loanPlans(CreditRepository $repo):Response{
-        $loanPlans=$repo->findAll();
-        return $this->render('credit/loanPlans.html.twig', [
+    public function loanPlans(CreditRepository $repo,PaginatorInterface $paginator,Request $request):Response{
+
+        $query = $repo->createQueryBuilder('c')
+        ->orderBy('c.minAmount', 'DESC')
+        ->getQuery();
+        $loanPlans = $paginator->paginate(
+        $query,
+        $request->query->getInt('page', 1),
+        3
+    );
+    return $this->render('credit/loanPlans.html.twig', [
             'loanPlans'=> $loanPlans
         ]);
     }
@@ -44,11 +52,11 @@ class CreditController extends AbstractController
     //         'plans'=> $plans
     //     ]);
     // }
-   
+    
     #[Route('/addLoanAdmin', name: 'addLoanAdmin')]
-    public function addLoanAdmin(Request $request,ManagerRegistry $doctrine): Response
+    public function addLoanAdmin(Request $request,ManagerRegistry $doctrine,FlashyNotifier $flashy): Response
     {
-       
+
            $credit = new Credit();
            $form = $this->createForm(CreditType::class,$credit);
            $form->handleRequest($request);

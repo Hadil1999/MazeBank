@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -141,32 +141,46 @@ $demandeCreditRepository->save($demandeCredit, true);
 
     
     #[Route('/Applies', name: 'all_applies')]
-    public function allApplies(DemandeCreditRepository $repo): Response
+    public function allApplies(EntityManagerInterface $entityManager,DemandeCreditRepository $repo,Request $request,PaginatorInterface $paginator): Response
     {
-        $applies=$repo->findAll();
+        $query = $this->getDoctrine()->getRepository(DemandeCredit::class)->createQueryBuilder('u')
+        ->orderBy('u.createdAt', 'DESC')
+                ->getQuery()
+                ->getResult();
+
+        $pagination = $paginator->paginate(
+
+            $query,
+
+            $request->query->getInt('page', 1),
+
+            5 // items per page
+            
+        );
+      
        
         return $this->render('demande_credit/credits.html.twig', [
-            'applies'=> $applies
+            'pagination' => $pagination
         ]);
       
     }
 
-    #[Route('/allApplies', name: 'applies')]
-    public function Applies(EntityManagerInterface $entityManager,DemandeCreditRepository $repo,Request $request): Response
-    {
-        $repository = $entityManager->getRepository(DemandeCredit::class);
-        $applies = $repository->createQueryBuilder('l')
-            ->orderBy('l.createdAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+    // #[Route('/allApplies', name: 'applies')]
+    // public function Applies(EntityManagerInterface $entityManager,DemandeCreditRepository $repo,Request $request): Response
+    // {
+    //     $repository = $entityManager->getRepository(DemandeCredit::class);
+    //     $applies = $repository->createQueryBuilder('l')
+    //         ->orderBy('l.createdAt', 'DESC')
+    //         ->getQuery()
+    //         ->getResult();
            
 
-        return $this->render('demande_credit/allApplies.html.twig', [
-            'applies' => $applies,
-        ]);
+    //     return $this->render('demande_credit/allApplies.html.twig', [
+    //         'applies' => $applies,
+    //     ]);
         
       
-    }
+    // }
     
     #[Route('/detailsCredit/{id}', name: 'credit_details')]
     public function details(DemandeCredit $DemandeCredit): Response
@@ -255,6 +269,48 @@ public function calculateMonthlyPayment(Request $request,$id,DemandeCredit $Dema
 
     ]);
 }
+     
+#[Route('/allApplies', name: 'applies')]
+public function search(Request $request,PaginatorInterface $paginator)
+    {
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $queryBuilder = $entityManager->createQueryBuilder();
+
+        $parameter1 = $request->query->get('parameter1');
+        $parameter2 = $request->query->get('parameter2');
+        $parameter3 = $request->query->get('parameter3');
+
+        $queryBuilder->select('e')
+            ->from(DemandeCredit::class, 'e')
+            ->where('e.amount LIKE :parameter1')
+            ->andWhere('e.status LIKE :parameter2')
+            ->andWhere('e.createdAt LIKE :parameter3')
+            ->orderBy('e.createdAt', 'DESC');
+        
+
+        $queryBuilder->setParameter('parameter1', '%' . $parameter1 . '%')
+            ->setParameter('parameter2', '%' . $parameter2 . '%')
+            ->setParameter('parameter3', '%' . $parameter3 . '%');
+
+            $query = $queryBuilder->getQuery();
+            $results = $paginator->paginate(
+                $query,
+                $request->query->getInt('page', 1),
+                5
+            );
+
+        return $this->render('demande_credit/allApplies.html.twig', [
+            'results' => $results,
+            'parameter1' => $parameter1,
+            'parameter2' => $parameter2,
+            'parameter3' => $parameter3,
+         
+
+
+        ]);
+    }
+
     /*********************************************JSON*********************************************************/
     #[Route("/demandes", name: "list")]
     

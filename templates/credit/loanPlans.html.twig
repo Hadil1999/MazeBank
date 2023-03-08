@@ -32,7 +32,12 @@
 	  <div class="table-responsive p-3">
 		<div id="geniustable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row btn-area"><div class="col-sm-4"><div class="dataTables_length" id="geniustable_length"><label>Show <select name="geniustable_length" aria-controls="geniustable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-4"></div><div class="col-sm-12 col-md-4 pr-3 text-right"><a class="btn btn-primary" href="{{path('addLoanAdmin')}}"><i class="fas fa-plus"></i> Add New Plan</a></div></div><div class="row"><div class="col-sm-12"><table id="geniustable" class="table table-hover dt-responsive dataTable no-footer dtr-inline" cellspacing="0" width="100%" role="grid" aria-describedby="geniustable_info" style="width: 100%;">
 		  <thead class="thead-light">
-			<tr role="row"><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 58px;">Title</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;">Limit</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 118px;">Installment</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;">withdraw monthly</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;">months</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 90px;">Status</th><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 81px;">Actions</th></tr>
+			<tr role="row"><th class="sorting_disabled" rowspan="1" colspan="1" style="width: 58px;">Title</th>
+			<th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;">Limit</th>
+			<th class="sorting_disabled" rowspan="1" colspan="1" style="width: 118px;">Installment</th>
+			<th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;">withdraw monthly</th>
+			<th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;">months</th>
+			<th class="sorting_disabled" rowspan="1" colspan="1" style="width: 81px;">Actions</th></tr>
 		  </thead>
 
 		<tbody><tr role="row" class="odd">
@@ -49,14 +54,6 @@
                                 </div></td><td><div>
                                    months: {{ p.months }}
                                 </div></td><td><div class="btn-group mb-1">
-                                <button type="button" class="btn btn-success btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  activated
-                                </button>
-                                <div class="dropdown-menu" x-placement="bottom-start">
-                                  <a href="javascript:;" data-toggle="modal" data-target="#statusModal" class="dropdown-item" data-href="/loan-plans/7/status/1">activated</a>
-                                  <a href="javascript:;" data-toggle="modal" data-target="#statusModal" class="dropdown-item" data-href="/loan-plans/7/status/0">deactivated</a>
-                                </div>
-                              </div></td><td><div class="btn-group mb-1">
                                   <button type="button" class="btn btn-primary btn-sm btn-rounded dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Actions
                                   </button>
@@ -66,7 +63,9 @@
                                   </div>
                                 </div></td></tr>
 							  {% endfor %}
-                                </tbody></table><div id="geniustable_processing" class="dataTables_processing card" style="display: none;"><img src="https://product.geniusocean.com/genius-bank/assets/images/33CiUFaI1641808748.gif"></div></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="geniustable_info" role="status" aria-live="polite">Showing 1 to 4 of 4 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="geniustable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="geniustable_previous"><a href="#" aria-controls="geniustable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="geniustable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="geniustable_next"><a href="#" aria-controls="geniustable" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+							         	{{ knp_pagination_render(loanPlans) }}
+
+                                </tbody></table>
 	  </div>
 	</div>
   </div>

@@ -38,6 +38,7 @@ class DemandeCreditRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+   
 
 //    /**
 //     * @return DemandeCredit[] Returns an array of DemandeCredit objects
