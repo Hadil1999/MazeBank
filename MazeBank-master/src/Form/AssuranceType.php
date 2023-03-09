@@ -4,8 +4,8 @@ namespace App\Form;
 
 use App\Entity\Assurance;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FileType;
-use Symfony\Component\Form\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,22 +23,21 @@ class AssuranceType extends AbstractType
                     new Assert\Length(['min' => 3, 'max' => 15]),
                 ],
             ])
-            ->add('image' /*FileType::class, [
-                'label' => 'assurance image',
+            ->add('image' , FileType::class, [
+                'label' => 'Assurance image',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'image/png',
-                            'image/jpg',
                             'image/jpeg',
+                            'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid assurance image',
+                        'mimeTypesMessage' => 'Please upload a valid image',
                     ])
                 ],
-            ]*/)
+            ])
             ->add('partenaire', TextType::class, [
                 'constraints' => [
                     new Assert\NotBlank(),],

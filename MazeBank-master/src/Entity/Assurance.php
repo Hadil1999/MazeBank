@@ -77,4 +77,15 @@ class Assurance
 
         return $this;
     }
+    public function getBrochureFilename()
+    {
+        return $this->image;
+    }
+
+    public function setBrochureFilename($brochureFilename)
+    {
+        $this->image = $brochureFilename;
+
+        return $this;
+    }
 }

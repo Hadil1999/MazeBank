@@ -3,12 +3,11 @@
 {% block Assurance %} active {% endblock %}
 
 {% block body %}
-    <h1>Assurance index</h1>
+    <h3 class="mt-4">La liste des Assurances</h3>
 
-    <table class="table">
+    {# <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Libelle</th>
                 <th>Image</th>
                 <th>Partenaire</th>
@@ -17,12 +16,11 @@
             </tr>
         </thead>
         <tbody>
-        {% for assurance in assurances %}
+       
             <tr>
-                <td>{{ assurance.id }}</td>
-                <td>{{ assurance.libelle }}</td>
-                <td>{{ assurance.image }}</td>
-                <td>{{ assurance.partenaire }}</td>
+                <td></td>
+                  <td><img src="" /></td>
+              <td></td>
                 <td>{{ assurance.type }}</td>
                 <td>
                     <a href="{{ path('app_assurance_show_front', {'id': assurance.id}) }}">show</a>
@@ -33,9 +31,35 @@
             <tr>
                 <td colspan="6">no records found</td>
             </tr>
-        {% endfor %}
+        
         </tbody>
-    </table>
-
-    <a href="{{ path('app_assurance_new_front') }}">Create new</a>
+    </table> #}
+    <input name="search" placeholder="recherche..." class="search w-25" onkeydown="recherche()" />
+    
+    <div class="row" id="place">
+     {% for assurance in assurances %}
+<div class="card col-md-4" style="width: 18rem;margin-top:50px;margin-bottom:50px">
+  <img class="card-img-top" src="{{ asset('uploads/brochures/' ~ assurance.image)|e('html_attr') }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ assurance.libelle }}</h5>
+    <p class="card-text">Partenaire: {{ assurance.partenaire }}</p>
+    <p class="card-text">Partenaire: {{ assurance.type }}</p>
+           {# <a class="btn btn-primary" href="{{ path('app_assurance_show_front', {'id': assurance.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('app_assurance_edit_front', {'id': assurance.id}) }}">edit</a>
+              #}
+  </div>
+  
+  </div>
+  {% endfor %}
+</div>
+    {# <a href="{{ path('app_assurance_new_front') }}">Create new</a> #}
+    <script>
+    const recherche = () => {
+        const search = document.querySelector(".search").value;
+        console.log(search);
+        $.ajax({url: "{{ path('app_assurance_search_client') }}" ,type: 'POST', data:{search}, success: function(result){
+            $("#place").html(result);
+        }});
+    }
+    </script>
 {% endblock %}

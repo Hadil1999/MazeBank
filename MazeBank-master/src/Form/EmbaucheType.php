@@ -38,7 +38,7 @@ class EmbaucheType extends AbstractType
             ->add('salaire', TextType::class, [
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Length(['min' => 1000, 'max' => 1800]),
+                    new Assert\Length(['min' => 3, 'max' => 4]),
                 ],
             ])
             ->add('duree')

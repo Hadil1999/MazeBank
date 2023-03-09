@@ -38,7 +38,18 @@ class AssuranceRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+ 
+    public function search($x): array {
+        return $this->createQueryBuilder('a')
+            ->where('a.libelle LIKE :search')
+            ->orWhere('a.partenaire LIKE :search')
+            ->orWhere('a.type LIKE :search')
+            ->setParameter('search', '%' . $x . '%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
 //    /**
 //     * @return Assurance[] Returns an array of Assurance objects
 //     */

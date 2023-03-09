@@ -20,6 +20,30 @@ class InvestissementController extends AbstractController
             'investissements' => $investissementRepository->findAll(),
         ]);
     }
+    #[Route('/back/s', name: 'app_investissement_sort', methods: ['GET'])]
+    public function sort(InvestissementRepository $investissementRepository): Response
+    {
+        $investissements = $investissementRepository->findAll();
+        usort($investissements, function($a, $b){
+            // var_dump($a->getMinBudget());
+            return $a->getMinBudget() - $b->getMinBudget();
+        });
+        return $this->render('investissement/index.html.twig', [
+            'investissements' => $investissements,
+        ]);
+    }
+    #[Route('/front/s', name: 'app_investissement_sort_front', methods: ['GET'])]
+    public function sortFront(InvestissementRepository $investissementRepository): Response
+    {
+        $investissements = $investissementRepository->findAll();
+        usort($investissements, function($a, $b){
+            return $a->getMinBudget() - $b->getMinBudget();
+        });
+        return $this->render('investissement/index_front.html.twig', [
+            'investissements' => $investissements,
+        ]);
+    }
+    
 
     #[Route('/front', name: 'app_investissement_index_front', methods: ['GET'])]
     public function index_front(InvestissementRepository $investissementRepository): Response
