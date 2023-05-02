@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JavaFXApplication6.jar" size="91055" download="eager" />
+    <jar href="JavaFXApplication6.jar" size="120839" download="eager" />
     <jar href="lib\TrayTester.jar" size="52070" download="eager" />
     <jar href="lib\itextpdf-5.5.9.jar" size="2287148" download="eager" />
     <jar href="lib\javax.mail.jar" size="659033" download="eager" />
@@ -18,6 +18,6 @@
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="JavaFXApp" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="com.mazebank.MainApp"  name="JavaFXApp" />
+  <jfx:javafx-desc  width="800" height="600" main-class="tests.MainApp"  name="JavaFXApp" />
   <update check="always"/>
 </jnlp>
